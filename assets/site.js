@@ -27,8 +27,8 @@
     de.setAttribute("lang", lang);
     de.setAttribute("dir", lang === "he" ? "rtl" : "ltr");
     document.querySelectorAll("[data-he]").forEach(function(el){
-      if (el.dataset.en === undefined) el.dataset.en = el.textContent;
-      el.textContent = lang === "he" ? el.dataset.he : el.dataset.en;
+      if (el.dataset.en === undefined) el.dataset.en = el.innerHTML;
+      el.innerHTML = lang === "he" ? el.dataset.he : el.dataset.en;
     });
     ATTRS.forEach(function(a){
       document.querySelectorAll("[data-he-" + a + "]").forEach(function(el){

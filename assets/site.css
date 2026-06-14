@@ -228,3 +228,28 @@ html[lang="he"] .page-hero h1{font-family:var(--serif);font-weight:900}
 .film-frame .play span::after{content:"";margin-inline-start:5px;border-style:solid;border-width:14px 0 14px 24px;border-color:transparent transparent transparent var(--indigo-2)}
 .film-frame iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
 .film-scrim{position:absolute;inset:0;background:linear-gradient(180deg,rgba(13,18,38,.1),rgba(13,18,38,.45))}
+
+/* ---------- split rows (sub-page editorial) ---------- */
+.split{display:grid;grid-template-columns:1fr 1fr;gap:clamp(1.8rem,5vw,4.5rem);align-items:center}
+.split .ph{overflow:hidden;border-radius:12px}
+.split:nth-of-type(even) .ph{order:2}
+@media (max-width:760px){.split{grid-template-columns:1fr;gap:1.4rem}.split:nth-of-type(even) .ph{order:0}}
+
+/* ---------- treatment / sights lists ---------- */
+.treatlist{border-top:1px solid var(--line)}
+.treat{display:flex;align-items:baseline;justify-content:space-between;gap:1rem;padding:1rem 0;border-bottom:1px solid var(--line)}
+.treat .tname{font-family:var(--serif);font-weight:700;font-size:1.1rem;color:var(--ink)}
+.treat .tdesc{color:var(--soft);font-size:.85rem}
+.treat .tfor{font-size:.76rem;letter-spacing:.12em;color:var(--turq-deep);white-space:nowrap}
+
+/* image cards reusing .cta-card */
+.grid-gal .cta-card{gap:0;align-items:stretch;text-align:start;padding:0}
+.gal-item .figcap::before{color:var(--turq-deep)}
+
+/* mid-width header tightening + mobile tap targets */
+@media (max-width:1180px){.main-nav{gap:1rem}.nav-link{font-size:.72rem;letter-spacing:.1em}}
+@media (max-width:760px){
+  .m-sub a{padding-block:.7rem;min-height:44px;display:flex;align-items:center}
+  .lang-toggle{min-height:40px;padding:.42rem .9rem}
+}
+@media (max-width:480px){.info-grid{grid-template-columns:1fr}.info-cell{border-inline-start:0;border-top:1px solid var(--line)}.info-cell:first-child{border-top:0}}

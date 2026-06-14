@@ -118,7 +118,6 @@
     .burger i:nth-child(1){top:17px}.burger i:nth-child(2){top:26px}
     .burger.is-open i:nth-child(1){top:21px;transform:rotate(45deg)}
     .burger.is-open i:nth-child(2){top:21px;transform:rotate(-45deg)}
-    @media (max-width:900px){.main-nav,.head-cta{display:none}.burger{display:block}}
 
     .m-menu{position:fixed;inset:0;z-index:130;background:var(--stone);display:flex;flex-direction:column;justify-content:center;padding:0 var(--pad);clip-path:inset(0 0 100% 0);visibility:hidden;transition:clip-path .65s cubic-bezier(.76,0,.24,1),visibility 0s .65s}
     .m-menu.is-open{clip-path:inset(0 0 0 0);visibility:visible;transition-delay:0s}
@@ -267,18 +266,18 @@
     .city-cap h3{font-family:var(--serif);font-weight:900;font-size:clamp(1.9rem,4.2vw,3.4rem);line-height:1.2;margin-top:.7rem}
     .city-cap p{color:rgba(42,36,25,.84);margin-top:.7rem;font-size:.95rem}
     .now-cap{margin-top:.9rem;font-size:.82rem;color:rgba(42,36,25,.82)}
-    .now-cap b{font-family:var(--serif);color:var(--safed);font-weight:700}
+    .now-cap b{font-family:var(--serif);color:var(--safed-deep);font-weight:700}
     .cap-a{top:clamp(6.5rem,14vh,9rem);inset-inline-start:var(--pad)}
     .cap-b{bottom:clamp(3.5rem,9vh,6rem);inset-inline-end:var(--pad);text-align:start;background:rgba(243,236,224,.85);backdrop-filter:blur(6px);border:1px solid var(--line);border-radius:46% 46% 12px 12px / 18% 18% 12px 12px;padding:2rem 1.7rem 1.5rem;max-width:23em}
     .cap-b b{font-family:var(--serif);font-weight:700;font-size:1.1rem;display:block;margin-bottom:.2rem}
-    .city-hint{position:absolute;z-index:3;bottom:1.4rem;inset-inline-start:50%;transform:translateX(50%);font-size:.62rem;letter-spacing:.3em;color:rgba(42,36,25,.65)}
+    .city-hint{position:absolute;z-index:3;bottom:1.4rem;inset-inline:0;margin-inline:auto;width:max-content;font-size:.62rem;letter-spacing:.3em;color:rgba(42,36,25,.65)}
     .city-sec.starts-dark .city-cap h3{color:var(--ivory)}
     .city-sec.starts-dark .city-cap p,.city-sec.starts-dark .city-cap .caps{color:rgba(247,241,230,.78)}
     .city-sec.starts-dark .now-cap{color:rgba(247,241,230,.72)}
     .city-sec.starts-dark .now-cap b{color:var(--gold-bright)}
     .city-sec.starts-dark .city-hint{color:rgba(247,241,230,.65)}
     .minimap{position:absolute;z-index:3;inset-inline-end:var(--pad);top:clamp(5.5rem,12vh,8rem);width:104px;padding:.7rem .6rem .45rem;background:rgba(243,236,224,.86);backdrop-filter:blur(6px);border:1px solid var(--line);border-radius:12px;text-align:center}
-    .minimap svg{width:100%;height:auto;display:block}
+    .minimap svg{width:100%;height:auto;display:block;transform:scaleY(-1)}
     .mm-route{fill:none;stroke:var(--gold);stroke-width:2.5;stroke-dasharray:4 3;stroke-linejoin:round}
     .mm-start{fill:var(--faint)}
     .mm-sign{fill:var(--ivory);stroke:var(--safed);stroke-width:1.2}
@@ -378,7 +377,7 @@
     .gal-item:hover .ph{transform:scale(1.03)}
     .gal-item img{width:100%;height:clamp(300px,36vw,460px);object-fit:cover}
     .figcap{display:flex;align-items:center;gap:.7rem;margin-top:1rem;font-size:.74rem;letter-spacing:.12em;color:var(--soft);justify-content:center}
-    .gal-item .figcap::before{content:counter(gal,decimal-leading-zero);direction:ltr;font-size:.64rem;letter-spacing:.18em;color:var(--gold)}
+    .gal-item .figcap::before{content:counter(gal,decimal-leading-zero);direction:ltr;font-size:.64rem;letter-spacing:.18em;color:var(--turq-deep)}
     .gal-item .figcap::after{content:"✦";color:var(--gold);font-size:.55rem}
     .gal-progress{height:1px;background:var(--line);margin:1rem var(--pad) 0}
     .gal-progress i{display:block;height:100%;background:var(--gold);transform:scaleX(0);transform-origin:100% 50%}
@@ -511,6 +510,11 @@
     .film-frame .play span::after{content:"";margin-inline-start:5px;border-style:solid;border-width:14px 0 14px 24px;border-color:transparent transparent transparent var(--indigo-2)}
     .film-frame iframe{position:absolute;inset:0;width:100%;height:100%;border:0;z-index:3}
     .film-scrim{position:absolute;inset:0;background:linear-gradient(180deg,rgba(13,18,38,.1),rgba(13,18,38,.5))}
+    /* ---------- polish: mobile + tap targets ---------- */
+    @media (max-width:560px){.minimap{display:none}}
+    @media (max-width:880px){.cap-b{max-width:none}}
+    @media (max-width:760px){.suite-chips button,.day-chips button{min-height:44px;padding-block:.7rem}.lang-toggle{min-height:40px}}
+    @media (max-width:480px){.info-grid{grid-template-columns:1fr}.info-cell{border-inline-start:0;border-top:1px solid var(--line)}.info-cell:first-child{border-top:0}}
   </style>
 </head>
 <body>
@@ -528,17 +532,17 @@
   </div>
 
   <header class="site-head" data-head>
-    <a class="brand" href="#top" aria-label="The Way Inn — home">
+    <a class="brand" href="#top" aria-label="The Way Inn — home" data-he-aria-label="The Way Inn — דף הבית">
       <img src="img/logo.webp" alt="" width="36" height="36">
       <span class="b-txt"><b class="en-d">The Way Inn</b><span class="b-sub ltr">BOUTIQUE HOTEL · SAFED</span></span>
     </a>
-    <nav class="main-nav" aria-label="Primary">
+    <nav class="main-nav" aria-label="Primary" data-he-aria-label="ניווט ראשי">
       <div class="nav-item"><a class="nav-link" href="#top" data-he="בית">Home</a></div>
-      <div class="nav-item"><a class="nav-link" href="#tree" data-he="הסוויטות">Our Rooms</a></div>
+      <div class="nav-item"><a class="nav-link" href="rooms.html" data-he="הסוויטות">Our Rooms</a></div>
       <div class="nav-item">
         <button class="nav-link" type="button" aria-haspopup="true" aria-expanded="false" data-he="ספא">SPA<i class="caret"></i></button>
         <div class="dropdown">
-          <a href="#spa" data-he="החמאם והספא">SPA &amp; Hammam</a>
+          <a href="spa.html" data-he="החמאם והספא">SPA &amp; Hammam</a>
           <a href="treatments.html" data-he="הטיפולים">The Treatments</a>
           <a href="spa-packages.html" data-he="חבילות ספא">Spa Packages</a>
         </div>
@@ -570,18 +574,18 @@
       <span class="clock-chip" data-clock-chip><span class="cdot"></span><span data-clock-text>Now in Safed</span></span>
       <button class="lang-toggle" type="button" data-lang-btn aria-label="החלפה לעברית"><span data-l="en">EN</span><span class="sep">/</span><span data-l="he">עב</span></button>
       <a class="head-cta" href="#reserve" data-he="להזמנת חדר">Book a room</a>
-      <button class="burger" data-burger aria-label="Menu" aria-expanded="false" aria-controls="mmenu"><i></i><i></i></button>
+      <button class="burger" data-burger aria-label="Menu" data-he-aria-label="תפריט" aria-expanded="false" aria-controls="mmenu"><i></i><i></i></button>
     </div>
     <i class="head-line" aria-hidden="true"></i>
   </header>
 
   <div class="m-menu" data-menu id="mmenu">
     <div class="m-group"><a class="m-row m-go" href="#top" data-he="בית">Home</a></div>
-    <div class="m-group"><a class="m-row m-go" href="#tree" data-he="הסוויטות">Our Rooms</a></div>
+    <div class="m-group"><a class="m-row m-go" href="rooms.html" data-he="הסוויטות">Our Rooms</a></div>
     <div class="m-group">
       <button class="m-row" type="button" data-acc data-he="ספא">SPA<i class="mcaret"></i></button>
       <div class="m-sub">
-        <a href="#spa" data-he="החמאם והספא">SPA &amp; Hammam</a>
+        <a href="spa.html" data-he="החמאם והספא">SPA &amp; Hammam</a>
         <a href="treatments.html" data-he="הטיפולים">The Treatments</a>
         <a href="spa-packages.html" data-he="חבילות ספא">Spa Packages</a>
       </div>
@@ -607,7 +611,7 @@
       </div>
     </div>
     <div class="m-group"><a class="m-row m-go" href="#reserve" data-he="צרו קשר">Contact Us</a></div>
-    <div class="m-group"><a class="m-row m-go" href="accessibility.html" data-he="נגישות">Handicapped Accessibility</a></div>
+    <div class="m-group"><a class="m-row m-go" href="accessibility.html" data-he="נגישות">Accessibility</a></div>
     <button class="lang-toggle m-lang" type="button" data-lang-btn aria-label="החלפה לעברית"><span data-l="en">EN</span><span class="sep">/</span><span data-l="he">עב</span></button>
     <p class="m-foot" data-he="סמטת י״ז 23, רובע האמנים, צפת">Simtat Yud-Zayin 23, Artists' Quarter, Safed<br><span class="ltr">+972 73-7750045</span></p>
   </div>
@@ -629,7 +633,7 @@
         <img class="hero-mark" src="img/logo.webp" alt="" data-hero-fade aria-hidden="true">
         <p class="hero-eyebrow" data-hero-fade data-he="בית אבן בן 250 שנה · רובע האמנים, צפת">A 250-year-old stone house · Artists' Quarter, Safed</p>
         <h1 class="hero-title">
-          <span class="line en"><span data-hero-line>The Way Inn</span></span>
+          <span class="line en ltr"><span data-hero-line>The Way Inn</span></span>
           <span class="line he"><span data-hero-line data-he="מלון בוטיק בלב העיר העתיקה">A boutique hotel in the heart of the old city</span></span>
         </h1>
         <p class="hero-hook" data-hero-fade data-he="עשר סוויטות על שם ספירות עץ-החיים, חצרות אבן מוצלות, ספא חמאם טורקי וגג שפונה אל הרי הגליל — בבית של רוני וג׳נין, בלב צפת.">Ten suites named for the Sephirot of the Tree of Life, shaded stone courtyards, a Turkish hammam spa and a rooftop facing the Galilee — in Rony &amp; Janine's home, in the heart of Safed.</p>
@@ -860,8 +864,8 @@
         <div class="buffet-grid">
           <div class="buffet-media" data-reveal>
             <div class="ph" data-clip><img src="img/restaurant.webp" alt="The dining hall — colourful chairs, patterned tiles and arched windows" data-he-alt="חדר האוכל של הבית — כיסאות צבעוניים, רצפת בלטות וחלונות קמרון" loading="lazy" decoding="async" data-plx></div>
-            <div class="ph sq" data-clip><img src="img/buffet-mezze.webp" alt="A Mediterranean salad table, overhead" data-he-alt="שולחן סלטים ים-תיכוני, מבט-על" loading="lazy" decoding="async"></div>
-            <div class="ph sq" data-clip><img src="img/buffet-bread.webp" alt="Home-baked breads fresh from the oven" data-he-alt="לחמים ביתיים שיצאו מהתנור" loading="lazy" decoding="async"></div>
+            <div class="ph sq" data-clip><img src="img/th/buffet-mezze.webp" alt="A Mediterranean salad table, overhead" data-he-alt="שולחן סלטים ים-תיכוני, מבט-על" loading="lazy" decoding="async"></div>
+            <div class="ph sq" data-clip><img src="img/th/buffet-bread.webp" alt="Home-baked breads fresh from the oven" data-he-alt="לחמים ביתיים שיצאו מהתנור" loading="lazy" decoding="async"></div>
           </div>
           <div class="buffet-text">
             <p class="lede" data-reveal data-he="<span class=&quot;tq&quot;>לה בופה</span> היא ארוחת הבוקר של הבית — שולחן פתוח ונדיב בחדר האבן הגדול: לחם שנאפה הבוקר, סלטים גליליים, גבינות, ביצים, פירות העונה וקפה בנחת."><span class="tq">La Buffet</span> is the house breakfast — an open, generous table in the grand stone hall: bread baked this morning, Galilean salads, cheeses, eggs, seasonal fruit and coffee at leisure.</p>
@@ -898,6 +902,21 @@
         <figure class="gal-item"><div class="ph"><img src="img/th/courtyard-fol.webp" alt="Flower of Life in the courtyard" data-he-alt="פרח-החיים בחצר" loading="lazy" decoding="async"></div><figcaption class="figcap" data-he="פרח-החיים">Flower of Life</figcaption></figure>
       </div>
       <div class="gal-progress" aria-hidden="true"><i data-gal-bar></i></div>
+    </section>
+
+    <!-- ============ HOSTS ============ -->
+    <section class="sec-pad" id="hosts">
+      <div class="wrap">
+        <div class="split" style="align-items:center">
+          <figure class="ph" data-clip style="overflow:hidden;border-radius:12px;margin:0"><img src="img/pages/founders-roof.webp" alt="Rony and Janine on the rooftop" data-he-alt="רוני וג׳נין על הגג" loading="lazy" decoding="async" data-plx style="width:100%;height:100%;object-fit:cover;min-height:300px"></figure>
+          <div>
+            <p class="caps" data-reveal style="margin-bottom:.8rem" data-he="המארחים שלכם">YOUR HOSTS</p>
+            <h2 data-split data-he="רוני וג׳נין." style="font-family:var(--serif);font-weight:900;font-size:clamp(2rem,5vw,3.6rem);line-height:1.1">Rony &amp; Janine.</h2>
+            <p class="lede" data-reveal style="margin-top:1.2rem" data-he="השף רוני בראל ואשתו ג׳נין הפכו את ביתם בן 250 השנה למלון הזה — רוני מבשל, ג׳נין מארחת, וכל המקום מתנהל על תחושת אכפתיות.">Chef Rony BarEl and his wife Janine turned their 250-year-old home into this hotel — Rony cooks, Janine hosts, and the whole place runs on the feeling of being looked after.</p>
+            <a class="btn btn-line" href="about.html" data-reveal style="margin-top:1.4rem" data-he="לסיפור המלא ↗">Read our story ↗</a>
+          </div>
+        </div>
+      </div>
     </section>
 
     <!-- ============ VIRTUAL TOUR (film) ============ -->
@@ -1039,9 +1058,12 @@
         <div>
           <h4 data-he="הבית">The house</h4>
           <p>
-            <a href="#tree" data-he="הסוויטות">Our Rooms</a><br>
-            <a href="#spa" data-he="החמאם והספא">SPA &amp; Hammam</a><br>
-            <a href="#buffet" data-he="לה בופה">La Buffet</a>
+            <a href="rooms.html" data-he="הסוויטות">Our Rooms</a><br>
+            <a href="spa.html" data-he="החמאם והספא">SPA &amp; Hammam</a><br>
+            <a href="events.html" data-he="אירועים">Event Planning</a><br>
+            <a href="#buffet" data-he="לה בופה">La Buffet</a><br>
+            <a href="about.html" data-he="הסיפור שלנו">Our Story</a><br>
+            <a href="faq.html" data-he="שאלות נפוצות">FAQ</a>
           </p>
         </div>
         <div>
@@ -1077,7 +1099,7 @@
     "use strict";
     var reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     var finePointer = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
-    var desktop = window.matchMedia("(min-width: 881px)").matches;
+    var desktop = window.matchMedia("(min-width: 1041px)").matches;
     var hasGSAP = typeof gsap !== "undefined" && typeof ScrollTrigger !== "undefined";
     if (reduced || !hasGSAP) document.documentElement.classList.add("no-motion");
     if (hasGSAP) gsap.registerPlugin(ScrollTrigger);
@@ -1475,7 +1497,10 @@
           setTimeout(function(){ panel.classList.remove("is-swap"); }, 600);
         }
       };
-      langCbs.push(function(){ selectSuite(currentKey); });
+      langCbs.push(function(){
+        SUITES.forEach(function(s){ if (nodeEls[s.key]) nodeEls[s.key].setAttribute("aria-label", t(s.en + " suite", "סוויטת " + s.he)); });
+        selectSuite(currentKey);
+      });
       reserveBtn.addEventListener("click", function(){
         setReserveSuite(currentKey);
         var target = document.querySelector("#reserve");
