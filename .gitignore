@@ -1,0 +1,6 @@
+.DS_Store
+Thumbs.db
+*.MOV
+*.HEIC
+_frames/
+.git/COMMIT_MSG.txt
