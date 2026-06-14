@@ -128,9 +128,8 @@
     /* ---------- hero ---------- */
     .hero{position:relative;min-height:100svh;display:flex;align-items:flex-end;overflow:hidden;color:var(--ivory)}
     .hero-slides{position:absolute;inset:0;will-change:transform}
-    .hero-slide{position:absolute;inset:0;background-size:cover;background-position:center;opacity:0;transform:scale(1.06);transition:opacity 1.7s ease}
-    .hero-slide.on{opacity:1;animation:kenburns 9s ease-out forwards}
-    @keyframes kenburns{from{transform:scale(1.06)}to{transform:scale(1.16)}}
+    .hero-slide{position:absolute;inset:0;background-size:cover;background-position:center;opacity:0;transform:scale(1.04);transition:opacity 1.6s ease,transform 7s ease-out;backface-visibility:hidden;will-change:opacity}
+    .hero-slide.on{opacity:1;transform:scale(1.12)}
     .hero-scrim{position:absolute;inset:0;background:linear-gradient(180deg,rgba(13,18,38,.5) 0%,rgba(13,18,38,.16) 36%,rgba(13,18,38,.72) 100%)}
     .hero-veil{position:absolute;inset:0;background:#0b1124;opacity:0;pointer-events:none}
     .hero-inner{position:relative;z-index:2;width:100%;padding:0 var(--pad) clamp(3.2rem,8vh,6rem)}
@@ -179,7 +178,7 @@
 
     [data-reveal]{opacity:0;transform:translateY(34px)}
     .no-motion [data-reveal],.no-motion [data-hero-fade]{opacity:1!important;transform:none!important}
-    @media (prefers-reduced-motion:reduce){.scroll-cue i::after,.clock-chip .cdot,.hero-slide.on{animation:none}}
+    @media (prefers-reduced-motion:reduce){.scroll-cue i::after,.clock-chip .cdot{animation:none}.hero-slide{transition:opacity .4s ease}.hero-slide.on{transform:none}}
 
     /* ---------- house / story ---------- */
     .split{display:grid;grid-template-columns:1.2fr 1fr;gap:clamp(2.5rem,6vw,6rem);align-items:start}
@@ -1277,11 +1276,11 @@
     /* ---------- hero slideshow (ken burns crossfade) ---------- */
     (function(){
       var slides = Array.prototype.slice.call(document.querySelectorAll("[data-hero-slides] .hero-slide"));
-      function loadBg(s){ if (s && s.dataset.bg) { s.style.backgroundImage = "url('" + s.dataset.bg + "')"; s.removeAttribute("data-bg"); } }
+      function loadBg(s){ if (s && s.dataset.bg) { var u = s.dataset.bg; s.style.backgroundImage = "url('" + u + "')"; s.removeAttribute("data-bg"); var im = new Image(); im.src = u; } }
       if (slides.length < 2 || reduced) return;
-      var warm = function(){ slides.forEach(loadBg); };
-      if (document.readyState === "complete") setTimeout(warm, 700);
-      else window.addEventListener("load", function(){ setTimeout(warm, 700); });
+      var warm = function(){ slides.forEach(loadBg); }; /* fetch+decode all slide images before the first crossfade */
+      if (document.readyState === "complete") warm();
+      else window.addEventListener("load", warm);
       var i = 0;
       setInterval(function(){
         if (document.hidden) return;
