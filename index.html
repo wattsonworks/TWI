@@ -1,16 +1,16 @@
 <!DOCTYPE html>
-<html lang="he" dir="rtl">
+<html lang="en" dir="ltr">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-  <title>The Way Inn · מלון בוטיק בעיר העתיקה של צפת</title>
-  <meta name="description" content="The Way Inn — מקלט פרטי בבית אבן בן 250 שנה ברובע האמנים בצפת. עשר סוויטות על שם ספירות עץ-החיים, חצרות מוצלות, ספא חמאם וגג עם נוף הגליל.">
+  <title>The Way Inn · Boutique Hotel in the Old City of Safed</title>
+  <meta name="description" content="The Way Inn — a boutique hotel in a 250-year-old stone house in the Artists' Quarter of Safed (Tzfat). Ten suites named for the Sephirot of the Tree of Life, shaded courtyards, a Turkish hammam spa and a rooftop over the Galilee.">
   <!-- Design concept of thewayinn.co.il — noindex so it never competes with the live site -->
   <meta name="robots" content="noindex, nofollow">
   <link rel="canonical" href="https://wattsonworks.github.io/TWI/">
   <meta name="theme-color" content="#1a2440">
-  <meta property="og:title" content="The Way Inn · מקלט פרטי בלב צפת העתיקה">
-  <meta property="og:description" content="עשר סוויטות על שם ספירות עץ-החיים, חצרות, ספא חמאם ונוף הגליל — בית אבן בן 250 שנה ברובע האמנים, צפת.">
+  <meta property="og:title" content="The Way Inn · Boutique Hotel in old Safed">
+  <meta property="og:description" content="Ten suites named for the Sephirot, courtyards, a Turkish hammam and Galilee views — a 250-year-old stone house in the Artists' Quarter of Safed.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://wattsonworks.github.io/TWI/">
   <meta property="og:image" content="https://wattsonworks.github.io/TWI/img/rooftop.webp">
@@ -452,16 +452,75 @@
     .copyline{display:flex;flex-wrap:wrap;gap:.6rem 2rem;justify-content:space-between;margin-top:2.6rem;padding-top:1.6rem;border-top:1px solid rgba(247,241,230,.14);font-size:.76rem;color:rgba(247,241,230,.5)}
     @media (max-width:880px){.foot-grid{grid-template-columns:1fr 1fr}}
 
+    /* ---------- mega-menu + dropdowns + lang toggle ---------- */
+    .main-nav{display:flex;align-items:center;gap:1.4rem}
+    .nav-item{position:relative}
+    .nav-link{display:inline-flex;align-items:center;gap:.35rem;font-size:.75rem;letter-spacing:.13em;text-transform:uppercase;opacity:.86;background:none;border:0;color:inherit;cursor:pointer;font-family:var(--sans);padding:.4rem 0;position:relative;transition:opacity .25s}
+    .nav-link:hover,.nav-item:hover .nav-link,.nav-link[aria-expanded="true"]{opacity:1}
+    .nav-link.is-active{opacity:1}
+    .nav-link.is-active::after{content:"";position:absolute;inset-inline-start:0;bottom:-2px;width:100%;height:1px;background:var(--gold)}
+    .nav-link .caret{width:6px;height:6px;border-inline-end:1.4px solid currentColor;border-bottom:1.4px solid currentColor;transform:rotate(45deg);margin-bottom:3px;transition:transform .25s;opacity:.8}
+    .nav-item:hover .caret,.nav-link[aria-expanded="true"] .caret{transform:rotate(-135deg);margin-bottom:-1px}
+    .dropdown{position:absolute;inset-inline-start:50%;top:calc(100% + .55rem);transform:translateX(-50%) translateY(8px);min-width:225px;background:rgba(243,236,224,.98);backdrop-filter:blur(10px);border:1px solid var(--line);border-radius:14px;box-shadow:0 22px 50px rgba(42,36,25,.18);padding:.5rem;opacity:0;visibility:hidden;transition:opacity .25s,transform .25s,visibility 0s .25s;z-index:5}
+    [dir="rtl"] .dropdown{transform:translateX(50%) translateY(8px)}
+    .nav-item:hover .dropdown,.nav-item:focus-within .dropdown,.dropdown.is-open{opacity:1;visibility:visible;transform:translateX(-50%) translateY(0);transition-delay:0s}
+    [dir="rtl"] .nav-item:hover .dropdown,[dir="rtl"] .nav-item:focus-within .dropdown,[dir="rtl"] .dropdown.is-open{transform:translateX(50%) translateY(0)}
+    .dropdown a{display:block;padding:.55rem .9rem;font-size:.82rem;letter-spacing:.03em;color:var(--ink);border-radius:9px;white-space:nowrap;transition:background .2s,color .2s}
+    .dropdown a:hover{background:var(--turq);color:var(--ivory)}
+    .head-right{display:flex;align-items:center;gap:.85rem;flex-shrink:0}
+    .lang-toggle{display:inline-flex;align-items:center;gap:.2rem;border:1px solid currentColor;border-radius:99px;padding:.3rem .7rem;font-size:.72rem;letter-spacing:.06em;background:none;color:inherit;cursor:pointer;font-family:var(--sans)}
+    .lang-toggle .sep{opacity:.4;margin-inline:.12rem}
+    .lang-toggle .off{opacity:.45}
+    @media (max-width:1180px){.clock-chip{display:none}}
+    @media (max-width:1040px){.main-nav,.head-cta{display:none}.burger{display:block}}
+    /* mobile accordion */
+    .m-menu{padding-top:5rem;overflow-y:auto;justify-content:flex-start}
+    .m-group{border-bottom:1px solid var(--line)}
+    .m-row{display:flex;align-items:center;justify-content:space-between;width:100%;background:none;border:0;color:var(--ink);font-family:var(--serif);font-weight:700;font-size:clamp(1.3rem,5vw,1.9rem);padding:.5rem 0;cursor:pointer;text-align:start}
+    .m-row .mcaret{width:9px;height:9px;border-inline-end:1.6px solid var(--turq);border-bottom:1.6px solid var(--turq);transform:rotate(45deg);transition:transform .3s;flex-shrink:0}
+    .m-group.open .m-row .mcaret{transform:rotate(-135deg)}
+    .m-sub{max-height:0;overflow:hidden;transition:max-height .35s ease}
+    .m-group.open .m-sub{max-height:32rem}
+    .m-sub a{display:block;font-family:var(--sans);font-weight:300;font-size:1rem;color:var(--soft);padding:.45rem 0 .45rem 1rem}
+    .m-sub a:hover{color:var(--turq)}
+    .m-lang{margin-top:1.2rem}
+
+    /* ---------- TripAdvisor ---------- */
+    .ta-sec{background:var(--stone-2)}
+    .ta-wrap{display:flex;flex-direction:column;align-items:center;text-align:center;gap:1.3rem}
+    .ta-badge{display:inline-flex;align-items:center;gap:.7rem;font-family:var(--display);font-size:1.15rem;color:var(--ink)}
+    .ta-owl{width:30px;height:30px}
+    .ta-dots{display:inline-flex;gap:4px}
+    .ta-dots i{width:14px;height:14px;border-radius:50%;background:#00aa6c;display:inline-block}
+    .ta-quotes{display:grid;grid-template-columns:repeat(3,1fr);gap:1.3rem;max-width:1000px;margin-top:.6rem}
+    .ta-quote{border:1px solid var(--line);border-radius:14px;padding:1.5rem 1.4rem;background:rgba(255,255,255,.4);text-align:start}
+    .ta-quote p{font-family:var(--serif);font-style:italic;color:var(--ink);font-size:1rem;line-height:1.7}
+    .ta-quote .who{margin-top:.8rem;font-size:.78rem;letter-spacing:.06em;color:var(--soft)}
+    @media (max-width:820px){.ta-quotes{grid-template-columns:1fr}}
+
+    /* ---------- video / virtual tour facade ---------- */
+    .film-sec{background:var(--indigo);color:var(--ivory)}
+    .film-sec .sec-head h2{color:var(--ivory)}
+    .film-sec .caps{color:rgba(247,241,230,.55)}
+    .film-sec .heb-ghost{color:var(--turq-bright);opacity:.07}
+    .film-sec .heb-num{background:var(--gold);color:var(--indigo-2)}
+    .film-frame{position:relative;max-width:1060px;margin:0 auto;aspect-ratio:16/9;border-radius:16px;overflow:hidden;box-shadow:0 34px 90px rgba(0,0,0,.45);cursor:pointer;background-size:cover;background-position:center}
+    .film-frame .play{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;z-index:2}
+    .film-frame .play span{width:84px;height:84px;border-radius:50%;background:rgba(247,241,230,.92);display:flex;align-items:center;justify-content:center;transition:transform .3s,background .3s}
+    .film-frame:hover .play span{transform:scale(1.08);background:var(--gold-bright)}
+    .film-frame .play span::after{content:"";margin-inline-start:5px;border-style:solid;border-width:14px 0 14px 24px;border-color:transparent transparent transparent var(--indigo-2)}
+    .film-frame iframe{position:absolute;inset:0;width:100%;height:100%;border:0;z-index:3}
+    .film-scrim{position:absolute;inset:0;background:linear-gradient(180deg,rgba(13,18,38,.1),rgba(13,18,38,.5))}
   </style>
 </head>
 <body>
-  <a class="skip" href="#house">דלג לתוכן</a>
+  <a class="skip" href="#house" data-he="דלג לתוכן">Skip to content</a>
 
   <div class="preloader" data-preloader>
     <svg class="fol" viewBox="0 0 120 120" aria-hidden="true" data-fol></svg>
     <div style="text-align:center">
       <div class="pre-word">The Way Inn</div>
-      <div class="pre-sub">צפת · SAFED</div>
+      <div class="pre-sub">SAFED · צפת</div>
     </div>
     <svg class="pre-curve" viewBox="0 0 100 12" preserveAspectRatio="none" aria-hidden="true">
       <path data-curve d="M0 0 H100 V11 Q50 11 0 11 Z" fill="#1a2440"/>
@@ -469,35 +528,88 @@
   </div>
 
   <header class="site-head" data-head>
-    <a class="brand" href="#top" aria-label="The Way Inn — לראש העמוד">
-      <img src="img/logo.webp" alt="" width="38" height="38">
-      <span class="b-txt"><b class="en-d">The Way Inn</b><span class="b-sub ltr">SUITE HOTEL · SAFED</span></span>
+    <a class="brand" href="#top" aria-label="The Way Inn — home">
+      <img src="img/logo.webp" alt="" width="36" height="36">
+      <span class="b-txt"><b class="en-d">The Way Inn</b><span class="b-sub ltr">BOUTIQUE HOTEL · SAFED</span></span>
     </a>
-    <nav class="main-nav" aria-label="ניווט ראשי">
-      <a href="#house">הבית</a>
-      <a href="#tree">הסוויטות</a>
-      <a href="#walk">הדרך</a>
-      <a href="#rooftop">הגג</a>
-      <a href="#spa">הספא</a>
-      <a href="#reserve">להזמין</a>
+    <nav class="main-nav" aria-label="Primary">
+      <div class="nav-item"><a class="nav-link" href="#top" data-he="בית">Home</a></div>
+      <div class="nav-item"><a class="nav-link" href="#tree" data-he="הסוויטות">Our Rooms</a></div>
+      <div class="nav-item">
+        <button class="nav-link" type="button" aria-haspopup="true" aria-expanded="false" data-he="ספא">SPA<i class="caret"></i></button>
+        <div class="dropdown">
+          <a href="#spa" data-he="החמאם והספא">SPA &amp; Hammam</a>
+          <a href="treatments.html" data-he="הטיפולים">The Treatments</a>
+          <a href="spa-packages.html" data-he="חבילות ספא">Spa Packages</a>
+        </div>
+      </div>
+      <div class="nav-item">
+        <button class="nav-link" type="button" aria-haspopup="true" aria-expanded="false" data-he="אירועים">Event Planning<i class="caret"></i></button>
+        <div class="dropdown">
+          <a href="upcoming-events.html" data-he="אירועים קרובים">Upcoming Events</a>
+          <a href="private-events.html" data-he="אירועים פרטיים">Private Events</a>
+          <a href="meeting-hall.html" data-he="אולם הכנסים">Meeting Hall</a>
+          <a href="barbat-mitzvah.html" data-he="בר/בת מצווה">Bar/Bat Mitzvah</a>
+          <a href="weddings.html" data-he="חתונות">Weddings</a>
+          <a href="events.html" data-he="הפקת אירועים">Event Planning</a>
+        </div>
+      </div>
+      <div class="nav-item">
+        <button class="nav-link" type="button" aria-haspopup="true" aria-expanded="false" data-he="המיקום">Location<i class="caret"></i></button>
+        <div class="dropdown">
+          <a href="safed-sights.html" data-he="אתרי צפת">Safed Sights</a>
+          <a href="galilee-attractions.html" data-he="אטרקציות בגליל">Galilee Attractions</a>
+          <a href="city-of-kabbalah.html" data-he="עיר הקבלה">City of Kabbalah</a>
+          <a href="our-location.html" data-he="איך מגיעים">Our Location</a>
+        </div>
+      </div>
+      <div class="nav-item"><a class="nav-link" href="#reserve" data-he="צרו קשר">Contact Us</a></div>
+      <div class="nav-item"><a class="nav-link" href="accessibility.html" data-he="נגישות">Accessibility</a></div>
     </nav>
-    <span class="clock-chip" data-clock-chip><span class="cdot"></span><span data-clock-text>עכשיו בצפת</span></span>
-    <a class="head-cta" href="#reserve">להזמנת חדר</a>
-    <button class="burger" data-burger aria-label="תפריט" aria-expanded="false" aria-controls="mmenu"><i></i><i></i></button>
+    <div class="head-right">
+      <span class="clock-chip" data-clock-chip><span class="cdot"></span><span data-clock-text>Now in Safed</span></span>
+      <button class="lang-toggle" type="button" data-lang-btn aria-label="החלפה לעברית"><span data-l="en">EN</span><span class="sep">/</span><span data-l="he">עב</span></button>
+      <a class="head-cta" href="#reserve" data-he="להזמנת חדר">Book a room</a>
+      <button class="burger" data-burger aria-label="Menu" aria-expanded="false" aria-controls="mmenu"><i></i><i></i></button>
+    </div>
     <i class="head-line" aria-hidden="true"></i>
   </header>
 
   <div class="m-menu" data-menu id="mmenu">
-    <a href="#house"><em>א</em>הבית</a>
-    <a href="#tree"><em>ב</em>עץ החיים · הסוויטות</a>
-    <a href="#walk"><em>ג</em>הדרך אל השער</a>
-    <a href="#courtyards"><em>ד</em>החצרות</a>
-    <a href="#rooftop"><em>ה</em>הגג והגליל</a>
-    <a href="#spa"><em>ו</em>החמאם והספא</a>
-    <a href="#buffet"><em>ז</em>לה בופה</a>
-    <a href="#gallery"><em>ח</em>גלריה</a>
-    <a href="#reserve"><em>ט</em>להזמין</a>
-    <p class="m-foot">סמטת י״ז 23, רובע האמנים, צפת<br><span class="ltr">+972 73-7750045</span></p>
+    <div class="m-group"><a class="m-row m-go" href="#top" data-he="בית">Home</a></div>
+    <div class="m-group"><a class="m-row m-go" href="#tree" data-he="הסוויטות">Our Rooms</a></div>
+    <div class="m-group">
+      <button class="m-row" type="button" data-acc data-he="ספא">SPA<i class="mcaret"></i></button>
+      <div class="m-sub">
+        <a href="#spa" data-he="החמאם והספא">SPA &amp; Hammam</a>
+        <a href="treatments.html" data-he="הטיפולים">The Treatments</a>
+        <a href="spa-packages.html" data-he="חבילות ספא">Spa Packages</a>
+      </div>
+    </div>
+    <div class="m-group">
+      <button class="m-row" type="button" data-acc data-he="אירועים">Event Planning<i class="mcaret"></i></button>
+      <div class="m-sub">
+        <a href="upcoming-events.html" data-he="אירועים קרובים">Upcoming Events</a>
+        <a href="private-events.html" data-he="אירועים פרטיים">Private Events</a>
+        <a href="meeting-hall.html" data-he="אולם הכנסים">Meeting Hall</a>
+        <a href="barbat-mitzvah.html" data-he="בר/בת מצווה">Bar/Bat Mitzvah</a>
+        <a href="weddings.html" data-he="חתונות">Weddings</a>
+        <a href="events.html" data-he="הפקת אירועים">Event Planning</a>
+      </div>
+    </div>
+    <div class="m-group">
+      <button class="m-row" type="button" data-acc data-he="המיקום">Location<i class="mcaret"></i></button>
+      <div class="m-sub">
+        <a href="safed-sights.html" data-he="אתרי צפת">Safed Sights</a>
+        <a href="galilee-attractions.html" data-he="אטרקציות בגליל">Galilee Attractions</a>
+        <a href="city-of-kabbalah.html" data-he="עיר הקבלה">City of Kabbalah</a>
+        <a href="our-location.html" data-he="איך מגיעים">Our Location</a>
+      </div>
+    </div>
+    <div class="m-group"><a class="m-row m-go" href="#reserve" data-he="צרו קשר">Contact Us</a></div>
+    <div class="m-group"><a class="m-row m-go" href="accessibility.html" data-he="נגישות">Handicapped Accessibility</a></div>
+    <button class="lang-toggle m-lang" type="button" data-lang-btn aria-label="החלפה לעברית"><span data-l="en">EN</span><span class="sep">/</span><span data-l="he">עב</span></button>
+    <p class="m-foot" data-he="סמטת י״ז 23, רובע האמנים, צפת">Simtat Yud-Zayin 23, Artists' Quarter, Safed<br><span class="ltr">+972 73-7750045</span></p>
   </div>
 
   <main id="top">
@@ -515,22 +627,22 @@
 
       <div class="hero-inner">
         <img class="hero-mark" src="img/logo.webp" alt="" data-hero-fade aria-hidden="true">
-        <p class="hero-eyebrow" data-hero-fade>בית אבן בן 250 שנה · רובע האמנים, צפת</p>
+        <p class="hero-eyebrow" data-hero-fade data-he="בית אבן בן 250 שנה · רובע האמנים, צפת">A 250-year-old stone house · Artists' Quarter, Safed</p>
         <h1 class="hero-title">
           <span class="line en"><span data-hero-line>The Way Inn</span></span>
-          <span class="line he"><span data-hero-line>מקלט פרטי בלב העיר העתיקה</span></span>
+          <span class="line he"><span data-hero-line data-he="מלון בוטיק בלב העיר העתיקה">A boutique hotel in the heart of the old city</span></span>
         </h1>
-        <p class="hero-hook" data-hero-fade>עשר סוויטות על שם ספירות עץ-החיים, חצרות אבן מוצלות, ספא חמאם טורקי וגג שפונה אל הרי הגליל — בבית של רוני וג׳נין, בלב צפת.</p>
+        <p class="hero-hook" data-hero-fade data-he="עשר סוויטות על שם ספירות עץ-החיים, חצרות אבן מוצלות, ספא חמאם טורקי וגג שפונה אל הרי הגליל — בבית של רוני וג׳נין, בלב צפת.">Ten suites named for the Sephirot of the Tree of Life, shaded stone courtyards, a Turkish hammam spa and a rooftop facing the Galilee — in Rony &amp; Janine's home, in the heart of Safed.</p>
         <div class="hero-meta" data-hero-fade>
-          <b>10</b><span>סוויטות</span>
+          <b>10</b><span data-he="סוויטות">suites</span>
           <span class="dot">·</span>
-          <b>250</b><span>שנות אבן</span>
+          <b>250</b><span data-he="שנות אבן">years of stone</span>
           <span class="dot">·</span>
-          <span class="en-d" style="font-size:1.05rem">A private sanctuary</span>
+          <span class="en-d" style="font-size:1.05rem" data-he="מלון בוטיק">A boutique hotel</span>
         </div>
         <div class="hero-cta" data-hero-fade>
-          <a class="btn btn-ivory" href="#tree">בחרו את הסוויטה שלכם</a>
-          <a class="btn btn-ghost" href="#reserve">להזמנת חדר</a>
+          <a class="btn btn-ivory" href="#tree" data-he="בחרו את הסוויטה שלכם">Choose your suite</a>
+          <a class="btn btn-ghost" href="#reserve" data-he="להזמנת חדר">Book a room</a>
         </div>
       </div>
       <div class="scroll-cue"><span class="ltr">SCROLL</span><i></i></div>
@@ -542,47 +654,47 @@
         <div class="sec-head" data-reveal>
           <span class="heb-ghost" aria-hidden="true">א</span>
           <span class="heb-num">א</span>
-          <h2 data-split>בית אבן בן 250 שנה, שהפך למקלט.</h2>
-          <span class="caps">THE HOUSE</span>
+          <h2 data-split data-he="בית אבן בן 250 שנה, שהפך למלון בוטיק.">A 250-year-old stone house, turned boutique hotel.</h2>
+          <span class="caps" data-he="הבית">THE HOUSE</span>
         </div>
         <div class="split">
           <div>
-            <p class="lede" data-reveal>השף <strong>רוני בראל</strong> ואשתו <strong>ג׳נין</strong> הפכו את בית האבן בן 250 השנה שלהם, בלב רובע האמנים של צפת, ל<span class="tq">אכסניית בוטיק קסומה</span> — עשר סוויטות שזורות סביב חצרות מוגנות, כל אחת על שם ספירה מעץ-החיים.</p>
+            <p class="lede" data-reveal data-he="השף <strong>רוני בראל</strong> ואשתו <strong>ג׳נין</strong> הפכו את בית האבן בן 250 השנה שלהם, בלב רובע האמנים של צפת, ל<span class=&quot;tq&quot;>מלון בוטיק קסום</span> — עשר סוויטות שזורות סביב חצרות מוגנות, כל אחת על שם ספירה מעץ-החיים.">Chef <strong>Rony BarEl</strong> and his wife <strong>Janine</strong> turned their 250-year-old stone house, in the heart of Safed's Artists' Quarter, into <span class="tq">an enchanting boutique hotel</span> — ten suites woven around sheltered courtyards, each named for a Sephirah of the Tree of Life.</p>
             <div class="house-stat" data-reveal>
-              <div class="st"><b>10</b><span>סוויטות · עץ-החיים</span></div>
-              <div class="st"><b>250</b><span>שנות אבן צפתית</span></div>
-              <div class="st"><b>∞</b><span>נוף הרי הגליל</span></div>
+              <div class="st"><b>10</b><span data-he="סוויטות · עץ-החיים">suites · Tree of Life</span></div>
+              <div class="st"><b>250</b><span data-he="שנות אבן צפתית">years of Safed stone</span></div>
+              <div class="st"><b>∞</b><span data-he="נוף הרי הגליל">Galilee views</span></div>
             </div>
             <div class="valuecards">
               <div class="vcard" data-reveal>
                 <svg class="vi" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 3 L20 9 V20 H4 V9 Z"/><path d="M9 20 v-6 h6 v6"/></svg>
-                <h3>מקלט פרטי</h3>
-                <p>בית, לא לובי. דלתות עץ עתיקות, קמרונות אבן ופינות שקטות — מקום להיעלם בו.</p>
+                <h3 data-he="בית, לא לובי">A home, not a lobby</h3>
+                <p data-he="דלתות עץ עתיקות, קמרונות אבן ופינות שקטות — מקום להיעלם בו.">Ancient wooden doors, stone vaults and quiet corners — a place to disappear into.</p>
               </div>
               <div class="vcard" data-reveal>
                 <svg class="vi" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="3.4"/><path d="M12 3v3M12 18v3M3 12h3M18 12h3"/></svg>
-                <h3>עיצוב קבלי</h3>
-                <p>כל סוויטה נושאת שם של ספירה. עץ-החיים הוא לא מוטיב — הוא המפה של הבית.</p>
+                <h3 data-he="עיצוב קבלי">Kabbalistic design</h3>
+                <p data-he="כל סוויטה נושאת שם של ספירה. עץ-החיים הוא לא מוטיב — הוא המפה של הבית.">Each suite is named for a Sephirah. The Tree of Life isn't a motif here — it's the map of the house.</p>
               </div>
               <div class="vcard" data-reveal>
                 <svg class="vi" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 20c4-1 5-7 8-7s4 6 8 7"/><path d="M12 13V4M9 6l3-2 3 2"/></svg>
-                <h3>מלאכת יד מקומית</h3>
-                <p>ראטאן, ברזל מסולסל, רהיטי וינטג׳ ואמנות צפתית — נאסף בידיים, לא מקטלוג.</p>
+                <h3 data-he="מלאכת יד מקומית">Local craft</h3>
+                <p data-he="ראטאן, ברזל מסולסל, רהיטי וינטג׳ ואמנות צפתית — נאסף בידיים, לא מקטלוג.">Rattan, wrought iron, vintage furniture and Safed art — gathered by hand, not from a catalogue.</p>
               </div>
               <div class="vcard" data-reveal>
                 <svg class="vi" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M5 21V8l7-5 7 5v13"/><path d="M9 21v-6h6v6"/><path d="M3 21h18"/></svg>
-                <h3>מטבח של שף</h3>
-                <p>בוקר של לחם חם ושולחן גלילי; ולקבוצות — ארוחות שף ים-תיכוניות בחדר האבן.</p>
+                <h3 data-he="מטבח של שף">A chef's kitchen</h3>
+                <p data-he="בוקר של לחם חם ושולחן גלילי; ולקבוצות — ארוחות שף ים-תיכוניות בחדר האבן.">Mornings of warm bread and a Galilean table; and for groups — Mediterranean chef's dinners in the stone hall.</p>
               </div>
             </div>
-            <p class="muted-note" data-reveal>מתארחים אצל רוני וג׳נין · <a href="#reserve">לבדיקת זמינות ומחיר</a></p>
+            <p class="muted-note" data-reveal data-he="מתארחים אצל רוני וג׳נין · <a href=&quot;#reserve&quot;>לבדיקת זמינות ומחיר</a>">Hosted by Rony &amp; Janine · <a href="#reserve">check availability &amp; rates</a></p>
           </div>
           <div class="house-media" data-reveal>
             <figure class="ph fol" data-clip>
-              <img src="img/courtyard-fol.webp" alt="קיר החצר של The Way Inn עם מנדלת פרח-החיים, מואר בזהב בין-ערביים" loading="lazy" decoding="async" data-plx>
-              <figcaption>פרח-החיים בחצר · The Way Inn</figcaption>
+              <img src="img/courtyard-fol.webp" alt="The Way Inn courtyard wall with the Flower-of-Life medallion, lit gold at dusk" data-he-alt="קיר החצר של The Way Inn עם מנדלת פרח-החיים, מואר בזהב בין-ערביים" loading="lazy" decoding="async" data-plx>
+              <figcaption data-he="פרח-החיים בחצר · The Way Inn">The Flower of Life · The Way Inn courtyard</figcaption>
             </figure>
-            <div class="ph small" data-clip><img src="img/lobby.webp" alt="הקבלה של The Way Inn — דלפק אבן עם תבליט פרח-לוטוס וריהוט עץ" loading="lazy" decoding="async"></div>
+            <div class="ph small" data-clip><img src="img/lobby.webp" alt="The Way Inn reception — a stone desk with a lotus relief and wooden furniture" data-he-alt="הקבלה של The Way Inn — דלפק אבן עם תבליט פרח-לוטוס וריהוט עץ" loading="lazy" decoding="async"></div>
           </div>
         </div>
       </div>
@@ -595,17 +707,17 @@
         <div class="sec-head" data-reveal>
           <span class="heb-ghost" aria-hidden="true">ב</span>
           <span class="heb-num">ב</span>
-          <h2 data-split>עץ החיים. עשר ספירות, עשר סוויטות.</h2>
-          <span class="caps">THE SUITES</span>
+          <h2 data-split data-he="עץ החיים. עשר ספירות, עשר סוויטות.">The Tree of Life. Ten Sephirot, ten suites.</h2>
+          <span class="caps" data-he="הסוויטות">THE SUITES</span>
         </div>
-        <p class="tree-intro" data-reveal>כל סוויטה נושאת שם של ספירה — <span class="ltr">חכמה · בינה · דעת · חסד · גבורה · תפארת · נצח · הוד · יסוד · מלכות</span>. געו בספירה על העץ, וגלו את החדר שמאחוריה.</p>
+        <p class="tree-intro" data-reveal data-he="כל סוויטה נושאת שם של ספירה — <span class=&quot;ltr&quot;>חכמה · בינה · דעת · חסד · גבורה · תפארת · נצח · הוד · יסוד · מלכות</span>. געו בספירה על העץ, וגלו את החדר שמאחוריה.">Each suite carries the name of a Sephirah — <span class="ltr">Chokhmah · Binah · Da'at · Chesed · Gevurah · Tiferet · Netzach · Hod · Yesod · Malchut</span>. Touch a Sephirah on the tree to discover the room behind it.</p>
         <div class="tree-wrap">
           <figure class="tree-fig" data-reveal>
-            <svg class="tree-svg" viewBox="0 0 600 760" role="group" aria-label="עץ החיים — בחירת סוויטה" data-tree>
+            <svg class="tree-svg" viewBox="0 0 600 760" role="group" aria-label="Tree of Life — choose a suite" data-he-aria-label="עץ החיים — בחירת סוויטה" data-tree>
               <g data-tree-edges></g>
               <g data-tree-nodes></g>
             </svg>
-            <p class="tree-hint">( געו בספירה · או בחרו מהרשימה )</p>
+            <p class="tree-hint" data-he="( געו בספירה · או בחרו מהעץ )">( touch a Sephirah on the tree )</p>
           </figure>
           <div class="suite-panel" data-suite-panel data-reveal>
             <div class="sp-img">
@@ -614,13 +726,13 @@
             </div>
             <div class="sp-body">
               <div data-sp-live aria-live="polite">
-                <div class="sp-name"><h3 data-sp-he>תפארת</h3><span class="en" data-sp-en>Tiferet</span></div>
-                <p class="sp-mean" data-sp-mean>היופי, ההרמוניה, הלב</p>
-                <p class="sp-blurb" data-sp-blurb>לב הבית.</p>
+                <div class="sp-name"><h3 data-sp-he>Tiferet</h3><span class="en" data-sp-en>תפארת</span></div>
+                <p class="sp-mean" data-sp-mean>Beauty, harmony, the heart</p>
+                <p class="sp-blurb" data-sp-blurb>The heart of the house.</p>
               </div>
               <div class="sp-foot">
-                <span class="sp-sleeps"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="9" cy="8" r="3"/><circle cx="17" cy="9" r="2.4"/><path d="M3 20c0-3 3-5 6-5s6 2 6 5M15 20c0-2 1.5-3.6 4-3.6"/></svg><span data-sp-sleeps>עד 2 אורחים</span></span>
-                <button class="btn btn-turq" type="button" data-sp-reserve>להזמין את הסוויטה הזו</button>
+                <span class="sp-sleeps"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="9" cy="8" r="3"/><circle cx="17" cy="9" r="2.4"/><path d="M3 20c0-3 3-5 6-5s6 2 6 5M15 20c0-2 1.5-3.6 4-3.6"/></svg><span data-sp-sleeps>up to 2 guests</span></span>
+                <button class="btn btn-turq" type="button" data-sp-reserve data-he="להזמין את הסוויטה הזו">Reserve this suite</button>
               </div>
             </div>
           </div>
@@ -639,16 +751,13 @@
         </div>
         <div class="city-thru" data-thru aria-hidden="true"></div>
         <div class="city-cap cap-a" data-cap-a>
-          <p class="caps">ג <span class="star">✦</span> הדרך</p>
-          <h3>בין סמטאות האבן של צפת.</h3>
-          <p>גללו — והעיר העתיקה תוביל אתכם, סמטה אחר סמטה, אל שער כחול אחד. <span data-walk-line>הערב יורד לאט.</span></p>
-          <p class="now-cap"><b class="ltr" data-now-time>—:—</b> עכשיו בצפת · <span data-now-state>הבית מחכה</span></p>
+          <p class="caps"><span data-he="ג ✦ הדרך">ג <span class="star">✦</span> The Way</span></p>
+          <h3 data-he="בין סמטאות האבן של צפת.">Through the stone alleys of Safed.</h3>
+          <p><span data-he="גללו — והעיר העתיקה תוביל אתכם, סמטה אחר סמטה, אל שער כחול אחד.">Scroll — and the old city leads you, alley by alley, to a single blue gate.</span> <span data-walk-line>The evening falls slowly.</span></p>
+          <p class="now-cap"><b class="ltr" data-now-time>—:—</b> <span data-now-state>Now in Safed</span></p>
         </div>
-        <div class="city-cap cap-b" data-cap-b>
-          <b>השער הכחול — סמטת י״ז 23.</b>
-          זה עם פרח-החיים על הקיר ממול. מעבר לו, החצר והבית. דחפו.
-        </div>
-        <p class="city-hint" data-city-hint>( המשיכו לגלול )</p>
+        <div class="city-cap cap-b" data-cap-b data-he="<b>השער הכחול — סמטת י״ז 23.</b> זה עם פרח-החיים על הקיר ממול. מעבר לו, החצר והבית. דחפו."><b>The blue gate — Simtat Yud-Zayin 23.</b> The one with the Flower of Life on the wall opposite. Beyond it, the courtyard and the house. Push.</div>
+        <p class="city-hint" data-city-hint data-he="( המשיכו לגלול )">( keep scrolling )</p>
         <div class="minimap" data-minimap aria-hidden="true">
           <svg viewBox="0 0 100 132">
             <path class="mm-route" d="M82 14 V84 H22"/>
@@ -658,7 +767,7 @@
             <rect class="mm-door" x="36" y="74" width="6" height="7" rx="1"/>
             <circle class="mm-dot" data-mm-dot cx="82" cy="14" r="3.6"/>
           </svg>
-          <span class="mm-lb">הדרך אל השער</span>
+          <span class="mm-lb" data-he="הדרך אל השער">The way to the gate</span>
         </div>
       </div>
     </section>
@@ -669,27 +778,27 @@
         <div class="sec-head" data-reveal>
           <span class="heb-ghost" aria-hidden="true">ד</span>
           <span class="heb-num">ד</span>
-          <h2 data-split>חצרות שקטות, אבן ופרחים.</h2>
-          <span class="caps">THE COURTYARDS</span>
+          <h2 data-split data-he="חצרות שקטות, אבן ופרחים.">Quiet courtyards, stone and flowers.</h2>
+          <span class="caps" data-he="החצרות">THE COURTYARDS</span>
         </div>
         <div class="place-grid">
           <div class="place-text">
-            <p data-reveal>הבית בנוי סביב <strong>חצרות מוגנות</strong> — פינות מוצלות עם עציצי פרחים ועשבי תיבול, מדרגות ברזל מסולסלות וקירות אבן צפתית. בלב הכל, הקיר עם מנדלת פרח-החיים, מואר בזהב בין-ערביים.</p>
-            <p data-reveal>כשהשמש שוקעת מעבר לגליל, החצר מתחלפת: צרצרים, ריח של עצי לימון, ושקט שקשה למצוא בלב עיר. כאן יושבים עם כוס תה, בלי למהר לשום מקום.</p>
-            <blockquote class="place-quote" data-reveal>״לא לבקר בצפת — לגור בה, ולו ללילה.״</blockquote>
-            <a class="btn btn-gold" href="#reserve" data-reveal>לשבת בחצר — להזמין לילה</a>
+            <p data-reveal data-he="הבית בנוי סביב <strong>חצרות מוגנות</strong> — פינות מוצלות עם עציצי פרחים ועשבי תיבול, מדרגות ברזל מסולסלות וקירות אבן צפתית. בלב הכל, הקיר עם מנדלת פרח-החיים, מואר בזהב בין-ערביים.">The house is built around <strong>sheltered courtyards</strong> — shaded corners with potted flowers and herbs, wrought-iron stairs and Safed-stone walls. At the heart of it all, the wall with the Flower-of-Life medallion, lit gold at dusk.</p>
+            <p data-reveal data-he="כשהשמש שוקעת מעבר לגליל, החצר מתחלפת: צרצרים, ריח של עצי לימון, ושקט שקשה למצוא בלב עיר. כאן יושבים עם כוס תה, בלי למהר לשום מקום.">When the sun sets over the Galilee the courtyard changes: crickets, the scent of lemon trees, and a quiet that's hard to find in the heart of a city. Here you sit with a glass of tea, in no hurry to be anywhere.</p>
+            <blockquote class="place-quote" data-reveal data-he="״לא לבקר בצפת — לגור בה, ולו ללילה.״">“Don't visit Safed — live in it, if only for a night.”</blockquote>
+            <a class="btn btn-gold" href="#reserve" data-reveal data-he="לשבת בחצר — להזמין לילה">Sit in the courtyard — book a night</a>
           </div>
           <div class="place-media" data-reveal>
-            <div class="ph tall" data-clip><img src="img/courtyard.webp" alt="חצר הבית — קיר אבן צפתי, מדרגות ברזל מסולסלות ופרחים" loading="lazy" decoding="async" data-plx></div>
-            <div class="ph" data-clip><img src="img/lounge.webp" alt="סלון מקומר עם גומחת ישיבה וכריות מזרחיות" loading="lazy" decoding="async"></div>
-            <div class="ph" data-clip><img src="img/courtyard-gate.webp" alt="שערי ברזל כחולים עם עציצי פרחים בחצר האבן" loading="lazy" decoding="async"></div>
+            <div class="ph tall" data-clip><img src="img/courtyard.webp" alt="The courtyard — Safed-stone wall, wrought-iron stairs and flowers" data-he-alt="חצר הבית — קיר אבן צפתי, מדרגות ברזל מסולסלות ופרחים" loading="lazy" decoding="async" data-plx></div>
+            <div class="ph" data-clip><img src="img/lounge.webp" alt="A vaulted lounge with a seating alcove and oriental cushions" data-he-alt="סלון מקומר עם גומחת ישיבה וכריות מזרחיות" loading="lazy" decoding="async"></div>
+            <div class="ph" data-clip><img src="img/courtyard-gate.webp" alt="Blue iron gates with flower pots in the stone courtyard" data-he-alt="שערי ברזל כחולים עם עציצי פרחים בחצר האבן" loading="lazy" decoding="async"></div>
           </div>
         </div>
       </div>
     </section>
 
     <!-- ============ ROOFTOP SUNSET ============ -->
-    <section class="roof-sec" id="rooftop" aria-label="הגג — שקיעה מעל הגליל">
+    <section class="roof-sec" id="rooftop" aria-label="The rooftop — sunset over the Galilee" data-he-aria-label="הגג — שקיעה מעל הגליל">
       <div class="roof-stage" data-roof>
         <div class="roof-photo" data-roof-photo aria-hidden="true"></div>
         <div class="roof-sun" data-roof-sun aria-hidden="true"></div>
@@ -700,10 +809,10 @@
           <path data-roof-ridge fill="#0e1726" d="M0 320 V210 L120 188 L260 214 L380 176 L520 206 L660 168 L820 200 L980 160 L1140 196 L1300 172 L1440 200 V320 Z"></path>
         </svg>
         <div class="roof-cap" data-reveal>
-          <p class="caps">ה <span class="star">✦</span> הגג</p>
-          <h3 data-roof-title>מרפסת הגג, מול הרי הגליל.</h3>
-          <p data-roof-sub>גללו — והשמש תשקע מעבר לרכס, הזהב יהפוך לכחול, והכוכבים יידלקו מעל צפת.</p>
-          <p class="roof-time"><b class="ltr" data-roof-clock>—:—</b> · <span data-roof-state>עכשיו בצפת</span></p>
+          <p class="caps"><span data-he="ה ✦ הגג">ה <span class="star">✦</span> The Rooftop</span></p>
+          <h3 data-roof-title>The rooftop terrace, facing the Galilee.</h3>
+          <p data-roof-sub>Scroll — the sun will set behind the ridge, the gold will turn to blue, and the stars will come out over Safed.</p>
+          <p class="roof-time"><b class="ltr" data-roof-clock>—:—</b> · <span data-roof-state>Now in Safed</span></p>
         </div>
       </div>
     </section>
@@ -715,25 +824,25 @@
         <div class="sec-head" data-reveal>
           <span class="heb-ghost" aria-hidden="true">ו</span>
           <span class="heb-num">ו</span>
-          <h2 data-split>חמאם טורקי. אבן חמה ואדים.</h2>
-          <span class="caps">HAMMAM &amp; SPA</span>
+          <h2 data-split data-he="חמאם טורקי. אבן חמה ואדים.">Turkish hammam. Warm stone and steam.</h2>
+          <span class="caps" data-he="חמאם וספא">HAMMAM &amp; SPA</span>
         </div>
         <div class="spa-grid">
           <div class="spa-text">
-            <p data-reveal>בלב בית האבן שוכן <strong>חמאם טורקי</strong> — אבן חמה, אדים רכים ושקט. מקום להוריד את העיר מהכתפיים, לבד או בזוג, לפני שיוצאים אל הגג לראות את הכוכבים.</p>
-            <p data-reveal>הטיפולים נעשים בתיאום מראש מול הקבלה, ומותאמים לאורחי הבית. <em>(זמינות, מטפלים ומחירים — לבירור בקבלה.)</em></p>
+            <p data-reveal data-he="בלב בית האבן שוכן <strong>חמאם טורקי</strong> — אבן חמה, אדים רכים ושקט. מקום להוריד את העיר מהכתפיים, לבד או בזוג, לפני שיוצאים אל הגג לראות את הכוכבים.">At the heart of the stone house lies a <strong>Turkish hammam</strong> — warm stone, soft steam and silence. A place to let the city slide off your shoulders, alone or as a couple, before heading up to the roof for the stars.</p>
+            <p data-reveal data-he="הטיפולים נעשים בתיאום מראש מול הקבלה, ומותאמים לאורחי הבית. <em>(זמינות, מטפלים ומחירים — לבירור בקבלה.)</em>">Treatments are arranged in advance with reception, tailored to house guests. <em>(Availability, therapists and prices — please ask at reception.)</em></p>
             <div class="treatlist" data-reveal>
-              <div class="treat"><div><div class="tname">טקס חמאם</div><div class="tdesc">קילוף, קצף וחום על שיש מחומם</div></div><div class="tfor">יחיד / זוג</div></div>
-              <div class="treat"><div><div class="tname">עיסוי רקמות</div><div class="tdesc">שמן חם, לחץ עמוק, שחרור</div></div><div class="tfor">יחיד</div></div>
-              <div class="treat"><div><div class="tname">טקס זוגי</div><div class="tdesc">חמאם ועיסוי, אחד ליד השני</div></div><div class="tfor">זוג</div></div>
-              <div class="treat"><div><div class="tname">פינוק פנים</div><div class="tdesc">מוצרים טבעיים, רוגע</div></div><div class="tfor">יחיד</div></div>
+              <div class="treat"><div><div class="tname" data-he="טקס חמאם">Hammam ritual</div><div class="tdesc" data-he="קילוף, קצף וחום על שיש מחומם">Scrub, foam and heat on warm marble</div></div><div class="tfor" data-he="יחיד / זוג">single / couple</div></div>
+              <div class="treat"><div><div class="tname" data-he="עיסוי רקמות">Deep-tissue massage</div><div class="tdesc" data-he="שמן חם, לחץ עמוק, שחרור">Warm oil, deep pressure, release</div></div><div class="tfor" data-he="יחיד">single</div></div>
+              <div class="treat"><div><div class="tname" data-he="טקס זוגי">Couples ritual</div><div class="tdesc" data-he="חמאם ועיסוי, אחד ליד השני">Hammam and massage, side by side</div></div><div class="tfor" data-he="זוג">couple</div></div>
+              <div class="treat"><div><div class="tname" data-he="פינוק פנים">Facial</div><div class="tdesc" data-he="מוצרים טבעיים, רוגע">Natural products, calm</div></div><div class="tfor" data-he="יחיד">single</div></div>
             </div>
-            <a class="btn btn-gold" href="#reserve" data-reveal style="margin-top:1.8rem">לתאם טיפול עם החדר</a>
+            <a class="btn btn-gold" href="#reserve" data-reveal style="margin-top:1.8rem" data-he="לתאם טיפול עם החדר">Add a treatment to your stay</a>
           </div>
           <div class="spa-media" data-reveal>
-            <div class="ph wide" data-clip><img src="img/arch-stone.webp" alt="מרחב אבן מקומר בבית — קשתות ואבן צפתית" loading="lazy" decoding="async"></div>
-            <div class="ph sq" data-clip><img src="img/lounge.webp" alt="פינת ישיבה מקומרת באבן" loading="lazy" decoding="async"></div>
-            <div class="ph sq" data-clip><img src="img/suites/hesed.webp" alt="חדר רחצה מרוצף פסיפס עם מדליון מזרחי" loading="lazy" decoding="async"></div>
+            <div class="ph wide" data-clip><img src="img/hammam.webp" alt="The candlelit Turkish hammam at The Way Inn" data-he-alt="החמאם הטורקי המואר בנרות ב-The Way Inn" loading="lazy" decoding="async"></div>
+            <div class="ph sq" data-clip><img src="img/arch-stone.webp" alt="Vaulted Safed-stone interior" data-he-alt="מרחב אבן מקומר בבית" loading="lazy" decoding="async"></div>
+            <div class="ph sq" data-clip><img src="img/suites/hesed.webp" alt="Mosaic-tiled bathroom with an oriental medallion" data-he-alt="חדר רחצה מרוצף פסיפס עם מדליון מזרחי" loading="lazy" decoding="async"></div>
           </div>
         </div>
       </div>
@@ -745,22 +854,22 @@
         <div class="sec-head" data-reveal>
           <span class="heb-ghost" aria-hidden="true">ז</span>
           <span class="heb-num">ז</span>
-          <h2 data-split>הבוקר מתחיל בלחם חם.</h2>
-          <span class="caps">LA BUFFET</span>
+          <h2 data-split data-he="הבוקר מתחיל בלחם חם.">Mornings begin with warm bread.</h2>
+          <span class="caps" data-he="לה בופה">LA BUFFET</span>
         </div>
         <div class="buffet-grid">
           <div class="buffet-media" data-reveal>
-            <div class="ph" data-clip><img src="img/restaurant.webp" alt="חדר האוכל של הבית — כיסאות צבעוניים, רצפת בלטות וחלונות קמרון" loading="lazy" decoding="async" data-plx></div>
-            <div class="ph sq" data-clip><img src="img/buffet-mezze.webp" alt="שולחן סלטים ים-תיכוני, מבט-על" loading="lazy" decoding="async"></div>
-            <div class="ph sq" data-clip><img src="img/buffet-bread.webp" alt="לחמים ביתיים שיצאו מהתנור" loading="lazy" decoding="async"></div>
+            <div class="ph" data-clip><img src="img/restaurant.webp" alt="The dining hall — colourful chairs, patterned tiles and arched windows" data-he-alt="חדר האוכל של הבית — כיסאות צבעוניים, רצפת בלטות וחלונות קמרון" loading="lazy" decoding="async" data-plx></div>
+            <div class="ph sq" data-clip><img src="img/buffet-mezze.webp" alt="A Mediterranean salad table, overhead" data-he-alt="שולחן סלטים ים-תיכוני, מבט-על" loading="lazy" decoding="async"></div>
+            <div class="ph sq" data-clip><img src="img/buffet-bread.webp" alt="Home-baked breads fresh from the oven" data-he-alt="לחמים ביתיים שיצאו מהתנור" loading="lazy" decoding="async"></div>
           </div>
           <div class="buffet-text">
-            <p class="lede" data-reveal><span class="tq">לה בופה</span> היא ארוחת הבוקר של הבית — שולחן פתוח ונדיב בחדר האבן הגדול: לחם שנאפה הבוקר, סלטים גליליים, גבינות, ביצים, פירות העונה וקפה בנחת.</p>
+            <p class="lede" data-reveal data-he="<span class=&quot;tq&quot;>לה בופה</span> היא ארוחת הבוקר של הבית — שולחן פתוח ונדיב בחדר האבן הגדול: לחם שנאפה הבוקר, סלטים גליליים, גבינות, ביצים, פירות העונה וקפה בנחת."><span class="tq">La Buffet</span> is the house breakfast — an open, generous table in the grand stone hall: bread baked this morning, Galilean salads, cheeses, eggs, seasonal fruit and coffee at leisure.</p>
             <div class="buffet-list" data-reveal>
-              <span>לחם הבית</span><span>סלטים וממרחים</span><span>גבינות גליליות</span><span>שקשוקה</span><span>פירות עונה</span><span>קפה איטלקי</span>
+              <span data-he="לחם הבית">House bread</span><span data-he="סלטים וממרחים">Salads &amp; spreads</span><span data-he="גבינות גליליות">Galilee cheeses</span><span data-he="שקשוקה">Shakshuka</span><span data-he="פירות עונה">Seasonal fruit</span><span data-he="קפה איטלקי">Italian coffee</span>
             </div>
-            <p data-reveal style="color:var(--soft);margin-bottom:1.6rem">השולחן ערוך מדי בוקר <strong class="ltr">08:00–10:30</strong>. הימים המדויקים, כשרות ומחיר — לאישור בקבלה.</p>
-            <a class="btn btn-turq" href="https://wattsonworks.github.io/labuffet/" target="_blank" rel="noopener" data-reveal>האתר המלא של לה בופה ↗</a>
+            <p data-reveal style="color:var(--soft);margin-bottom:1.6rem" data-he="השולחן ערוך מדי בוקר <strong class=&quot;ltr&quot;>08:00–10:30</strong>. הימים המדויקים, כשרות ומחיר — לאישור בקבלה.">The table is set every morning <strong class="ltr">08:00–10:30</strong>. Exact days, kashrut and price — confirm at reception.</p>
+            <a class="btn btn-turq" href="https://wattsonworks.github.io/labuffet/" target="_blank" rel="noopener" data-reveal data-he="האתר המלא של לה בופה ↗">The full La Buffet site ↗</a>
           </div>
         </div>
       </div>
@@ -772,23 +881,54 @@
         <div class="sec-head" style="margin-bottom:0" data-reveal>
           <span class="heb-ghost" aria-hidden="true">ח</span>
           <span class="heb-num">ח</span>
-          <h2 data-split>מבט אל הבית</h2>
+          <h2 data-split data-he="מבט אל הבית">A look around the house</h2>
         </div>
-        <span class="caps" data-reveal>( גללו הצידה )</span>
+        <span class="caps" data-reveal data-he="( גללו הצידה )">( scroll sideways )</span>
       </div>
       <div class="gal-scroll" data-gal>
-        <figure class="gal-item"><div class="ph"><img src="img/th/tiferet.webp" alt="סוויטת תפארת" loading="lazy" decoding="async"></div><figcaption class="figcap">תפארת · לב הבית</figcaption></figure>
-        <figure class="gal-item"><div class="ph"><img src="img/th/courtyard.webp" alt="חצר הבית" loading="lazy" decoding="async"></div><figcaption class="figcap">חצר הבית</figcaption></figure>
-        <figure class="gal-item"><div class="ph"><img src="img/th/malchut.webp" alt="סוויטת מלכות" loading="lazy" decoding="async"></div><figcaption class="figcap">מלכות · הדירה</figcaption></figure>
-        <figure class="gal-item"><div class="ph"><img src="img/th/rooftop.webp" alt="מרפסת הגג מול הגליל" loading="lazy" decoding="async"></div><figcaption class="figcap">הגג מול הגליל</figcaption></figure>
-        <figure class="gal-item"><div class="ph"><img src="img/th/gevurah.webp" alt="סוויטת גבורה — גומחת אבן" loading="lazy" decoding="async"></div><figcaption class="figcap">גבורה · גומחת אבן</figcaption></figure>
-        <figure class="gal-item"><div class="ph"><img src="img/th/lobby.webp" alt="הקבלה של הבית" loading="lazy" decoding="async"></div><figcaption class="figcap">הקבלה</figcaption></figure>
-        <figure class="gal-item"><div class="ph"><img src="img/th/yesod.webp" alt="סוויטת יסוד" loading="lazy" decoding="async"></div><figcaption class="figcap">יסוד · פרגוד סגול</figcaption></figure>
-        <figure class="gal-item"><div class="ph"><img src="img/th/restaurant.webp" alt="חדר האוכל הצבעוני" loading="lazy" decoding="async"></div><figcaption class="figcap">חדר האוכל</figcaption></figure>
-        <figure class="gal-item"><div class="ph"><img src="img/th/galilee.webp" alt="נוף הרי הגליל מהבית" loading="lazy" decoding="async"></div><figcaption class="figcap">הרי הגליל</figcaption></figure>
-        <figure class="gal-item"><div class="ph"><img src="img/th/courtyard-fol.webp" alt="פרח-החיים בחצר" loading="lazy" decoding="async"></div><figcaption class="figcap">פרח-החיים</figcaption></figure>
+        <figure class="gal-item"><div class="ph"><img src="img/th/tiferet.webp" alt="Tiferet suite" data-he-alt="סוויטת תפארת" loading="lazy" decoding="async"></div><figcaption class="figcap" data-he="תפארת · לב הבית">Tiferet · the heart</figcaption></figure>
+        <figure class="gal-item"><div class="ph"><img src="img/th/courtyard.webp" alt="The courtyard" data-he-alt="חצר הבית" loading="lazy" decoding="async"></div><figcaption class="figcap" data-he="חצר הבית">The courtyard</figcaption></figure>
+        <figure class="gal-item"><div class="ph"><img src="img/th/malchut.webp" alt="Malchut suite" data-he-alt="סוויטת מלכות" loading="lazy" decoding="async"></div><figcaption class="figcap" data-he="מלכות · הדירה">Malchut · the apartment</figcaption></figure>
+        <figure class="gal-item"><div class="ph"><img src="img/th/rooftop.webp" alt="Rooftop over the Galilee" data-he-alt="מרפסת הגג מול הגליל" loading="lazy" decoding="async"></div><figcaption class="figcap" data-he="הגג מול הגליל">The rooftop</figcaption></figure>
+        <figure class="gal-item"><div class="ph"><img src="img/th/gevurah.webp" alt="Gevurah suite — stone niche" data-he-alt="סוויטת גבורה — גומחת אבן" loading="lazy" decoding="async"></div><figcaption class="figcap" data-he="גבורה · גומחת אבן">Gevurah · stone niche</figcaption></figure>
+        <figure class="gal-item"><div class="ph"><img src="img/th/lobby.webp" alt="The reception" data-he-alt="הקבלה של הבית" loading="lazy" decoding="async"></div><figcaption class="figcap" data-he="הקבלה">Reception</figcaption></figure>
+        <figure class="gal-item"><div class="ph"><img src="img/th/yesod.webp" alt="Yesod suite" data-he-alt="סוויטת יסוד" loading="lazy" decoding="async"></div><figcaption class="figcap" data-he="יסוד · פרגוד סגול">Yesod · purple screen</figcaption></figure>
+        <figure class="gal-item"><div class="ph"><img src="img/th/restaurant.webp" alt="The colourful dining room" data-he-alt="חדר האוכל הצבעוני" loading="lazy" decoding="async"></div><figcaption class="figcap" data-he="חדר האוכל">Dining room</figcaption></figure>
+        <figure class="gal-item"><div class="ph"><img src="img/th/galilee.webp" alt="Galilee mountain view" data-he-alt="נוף הרי הגליל מהבית" loading="lazy" decoding="async"></div><figcaption class="figcap" data-he="הרי הגליל">The Galilee</figcaption></figure>
+        <figure class="gal-item"><div class="ph"><img src="img/th/courtyard-fol.webp" alt="Flower of Life in the courtyard" data-he-alt="פרח-החיים בחצר" loading="lazy" decoding="async"></div><figcaption class="figcap" data-he="פרח-החיים">Flower of Life</figcaption></figure>
       </div>
       <div class="gal-progress" aria-hidden="true"><i data-gal-bar></i></div>
+    </section>
+
+    <!-- ============ VIRTUAL TOUR (film) ============ -->
+    <section class="sec-pad film-sec" id="film">
+      <div class="wrap">
+        <div class="sec-head" data-reveal>
+          <h2 data-split data-he="סרט קצר על הבית">A short film of the house</h2>
+          <span class="caps" data-he="סיור וירטואלי">VIRTUAL TOUR</span>
+        </div>
+        <div class="film-frame" data-film="7u9PjVNILWU" style="background-image:url('img/courtyard.webp')" role="button" tabindex="0" aria-label="Play the film" data-he-aria-label="הפעלת הסרט">
+          <div class="film-scrim" aria-hidden="true"></div>
+          <div class="play" aria-hidden="true"><span></span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ TRIPADVISOR ============ -->
+    <section class="sec-pad ta-sec" id="reviews">
+      <div class="wrap ta-wrap">
+        <h2 style="font-family:var(--serif);font-weight:900;font-size:clamp(2rem,5vw,3.4rem);text-align:center" data-split data-he="אהובים על האורחים שלנו">Loved by our guests</h2>
+        <div class="ta-badge" data-reveal>
+          <span class="ta-dots" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span>
+          <span data-he="מצוין · ביקורות ב-TripAdvisor">Excellent · on TripAdvisor</span>
+        </div>
+        <div class="ta-quotes">
+          <div class="ta-quote" data-reveal><p>“Gem in Tzfat”</p><span class="who" data-he="ביקורת אורח · TripAdvisor">Guest review · TripAdvisor</span></div>
+          <div class="ta-quote" data-reveal><p>“Beautiful place with beautiful views”</p><span class="who" data-he="ביקורת אורח · TripAdvisor">Guest review · TripAdvisor</span></div>
+          <div class="ta-quote" data-reveal><p>“Serene night in Tzfat”</p><span class="who" data-he="ביקורת אורח · TripAdvisor">Guest review · TripAdvisor</span></div>
+        </div>
+        <a class="btn btn-line" href="https://www.tripadvisor.com/Hotel_Review-g297763-d9717848-Reviews-The_Way_Inn-Safed_Galilee_Region_Northern_District.html" target="_blank" rel="noopener" data-reveal data-he="לקריאת הביקורות ב-TripAdvisor ↗">Read reviews on TripAdvisor ↗</a>
+      </div>
     </section>
 
     <!-- ============ RESERVE ============ -->
@@ -799,44 +939,44 @@
           <circle cx="32" cy="32" r="9" transform="translate(4.5 7.8)"/><circle cx="32" cy="32" r="9" transform="translate(-4.5 7.8)"/>
           <circle cx="32" cy="32" r="9" transform="translate(4.5 -7.8)"/><circle cx="32" cy="32" r="9" transform="translate(-4.5 -7.8)"/>
         </svg>
-        <p class="caps" data-reveal style="margin-bottom:1.1rem">ט <span class="star">✦</span> להזמין</p>
-        <h2 data-reveal>הדרך <em>הביתה.</em></h2>
-        <p class="sub" data-reveal>הרכיבו את השהות שלכם — סוויטה, תאריך, לילות ומספר אורחים — והשליחה תפתח וואטסאפ עם הכל מוכן. הקבלה מאשרת זמינות ומחיר.</p>
+        <p class="caps" data-reveal style="margin-bottom:1.1rem"><span data-he="ט ✦ להזמין">ט <span class="star">✦</span> Reserve</span></p>
+        <h2 data-reveal data-he="הדרך <em>הביתה.</em>">The way <em>home.</em></h2>
+        <p class="sub" data-reveal data-he="הרכיבו את השהות שלכם — סוויטה, תאריך, לילות ומספר אורחים — והשליחה תפתח וואטסאפ עם הכל מוכן. הקבלה מאשרת זמינות ומחיר.">Compose your stay — a suite, a date, nights and guests — and send opens WhatsApp with everything ready. Reception confirms availability and price.</p>
 
         <div class="composer" data-reveal>
           <div class="cmp-row">
-            <p class="cmp-lb">הסוויטה</p>
-            <div class="suite-chips" data-cmp-suites role="group" aria-label="בחירת סוויטה"></div>
+            <p class="cmp-lb" data-he="הסוויטה">The suite</p>
+            <div class="suite-chips" data-cmp-suites role="group" aria-label="Choose a suite" data-he-aria-label="בחירת סוויטה"></div>
           </div>
           <div class="cmp-row">
-            <p class="cmp-lb">צ׳ק-אין</p>
-            <div class="day-chips" data-cmp-days role="group" aria-label="בחירת תאריך"></div>
+            <p class="cmp-lb" data-he="צ׳ק-אין">Check-in</p>
+            <div class="day-chips" data-cmp-days role="group" aria-label="Choose a date" data-he-aria-label="בחירת תאריך"></div>
           </div>
           <div class="cmp-row">
             <div class="cmp-steppers">
               <div class="stepper-b">
-                <p class="cmp-lb" style="margin:0">לילות</p>
+                <p class="cmp-lb" style="margin:0" data-he="לילות">Nights</p>
                 <span class="stepper">
-                  <button type="button" data-nights="-1" aria-label="פחות לילות">−</button>
+                  <button type="button" data-nights="-1" aria-label="Fewer nights" data-he-aria-label="פחות לילות">−</button>
                   <output data-nights-out aria-live="polite">2</output>
-                  <button type="button" data-nights="1" aria-label="יותר לילות">+</button>
+                  <button type="button" data-nights="1" aria-label="More nights" data-he-aria-label="יותר לילות">+</button>
                 </span>
               </div>
               <div class="stepper-b">
-                <p class="cmp-lb" style="margin:0">אורחים</p>
+                <p class="cmp-lb" style="margin:0" data-he="אורחים">Guests</p>
                 <span class="stepper">
-                  <button type="button" data-guests="-1" aria-label="פחות אורחים">−</button>
+                  <button type="button" data-guests="-1" aria-label="Fewer guests" data-he-aria-label="פחות אורחים">−</button>
                   <output data-guests-out aria-live="polite">2</output>
-                  <button type="button" data-guests="1" aria-label="יותר אורחים">+</button>
+                  <button type="button" data-guests="1" aria-label="More guests" data-he-aria-label="יותר אורחים">+</button>
                 </span>
               </div>
             </div>
           </div>
           <div class="cmp-send">
-            <p class="cmp-summary" data-cmp-summary role="status">בחרו סוויטה ותאריך — וההזמנה תיפתח בוואטסאפ.</p>
+            <p class="cmp-summary" data-cmp-summary role="status">Choose a suite and a date — your request opens in WhatsApp.</p>
             <a class="send-btn" data-cmp-send target="_blank" rel="noopener" aria-disabled="true">
               <svg viewBox="0 0 32 32" aria-hidden="true"><path fill="currentColor" d="M16 3a13 13 0 0 0-11.16 19.6L3 29l6.6-1.74A13 13 0 1 0 16 3Zm0 23.74a10.7 10.7 0 0 1-5.46-1.5l-.39-.23-3.92 1.03 1.05-3.83-.25-.4A10.74 10.74 0 1 1 16 26.74Zm6-7.83c-.32-.16-1.92-.95-2.22-1.06s-.51-.16-.73.16-.84 1.06-1.03 1.28-.38.24-.7.08a8.8 8.8 0 0 1-2.6-1.6 9.7 9.7 0 0 1-1.8-2.24c-.19-.32 0-.5.14-.66.15-.15.32-.38.48-.57s.21-.32.32-.54.05-.4-.03-.57-.73-1.74-1-2.39-.53-.55-.73-.56h-.62a1.2 1.2 0 0 0-.87.4 3.62 3.62 0 0 0-1.14 2.7 6.27 6.27 0 0 0 1.33 3.36 14.4 14.4 0 0 0 5.55 4.9c.78.33 1.39.53 1.86.68a4.5 4.5 0 0 0 2.05.13 3.36 3.36 0 0 0 2.2-1.55 2.74 2.74 0 0 0 .19-1.55c-.08-.13-.29-.21-.61-.37Z"/></svg>
-              <span>שלחו בקשת הזמנה</span>
+              <span data-he="שלחו בקשת הזמנה">Send booking request</span>
             </a>
           </div>
         </div>
@@ -846,19 +986,19 @@
             <svg viewBox="0 0 32 32"><path fill="currentColor" d="M16 3a13 13 0 0 0-11.16 19.6L3 29l6.6-1.74A13 13 0 1 0 16 3Zm0 23.74a10.7 10.7 0 0 1-5.46-1.5l-.39-.23-3.92 1.03 1.05-3.83-.25-.4A10.74 10.74 0 1 1 16 26.74Zm6-7.83c-.32-.16-1.92-.95-2.22-1.06s-.51-.16-.73.16-.84 1.06-1.03 1.28-.38.24-.7.08a8.8 8.8 0 0 1-2.6-1.6 9.7 9.7 0 0 1-1.8-2.24c-.19-.32 0-.5.14-.66.15-.15.32-.38.48-.57s.21-.32.32-.54.05-.4-.03-.57-.73-1.74-1-2.39-.53-.55-.73-.56h-.62a1.2 1.2 0 0 0-.87.4 3.62 3.62 0 0 0-1.14 2.7 6.27 6.27 0 0 0 1.33 3.36 14.4 14.4 0 0 0 5.55 4.9c.78.33 1.39.53 1.86.68a4.5 4.5 0 0 0 2.05.13 3.36 3.36 0 0 0 2.2-1.55 2.74 2.74 0 0 0 .19-1.55c-.08-.13-.29-.21-.61-.37Z"/></svg>
             <span class="lb">WHATSAPP</span>
             <span class="val ltr">+972 52-688-1116</span>
-            <span class="hint">הדרך המהירה להזמין</span>
+            <span class="hint" data-he="הדרך המהירה להזמין">The quickest way to book</span>
           </a>
           <a class="cta-card" data-reveal href="tel:+972737750045">
             <svg viewBox="0 0 24 24"><path fill="currentColor" d="M20 17.5c-1.2 0-2.4-.2-3.6-.6-.4-.1-.8 0-1.1.2l-2.2 2.2a17.4 17.4 0 0 1-7.7-7.7l2.2-2.2c.3-.3.4-.7.2-1.1A12.6 12.6 0 0 1 7.2 4c0-.5-.5-1-1-1H2.5c-.5 0-1 .5-1 1 0 10 8.5 18.5 18.5 18.5.5 0 1-.5 1-1V18.5c0-.5-.5-1-1-1Z"/></svg>
-            <span class="lb">קבלה — טלפון</span>
+            <span class="lb" data-he="קבלה — טלפון">RECEPTION</span>
             <span class="val ltr">+972 73-7750045</span>
-            <span class="hint">שאלות וזמינות</span>
+            <span class="hint" data-he="שאלות וזמינות">Questions &amp; availability</span>
           </a>
-          <a class="cta-card" data-reveal href="mailto:info@thewayinn.co.il?subject=The%20Way%20Inn%20%E2%80%94%20%D7%91%D7%A7%D7%A9%D7%AA%20%D7%94%D7%96%D7%9E%D7%A0%D7%94">
+          <a class="cta-card" data-reveal href="mailto:info@thewayinn.co.il?subject=The%20Way%20Inn%20%E2%80%94%20Booking%20enquiry">
             <svg viewBox="0 0 24 24"><path fill="currentColor" d="M4 4h16a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2Zm0 2v.4l8 5.2 8-5.2V6H4Zm0 12h16V8.8l-7.4 4.8a1 1 0 0 1-1.2 0L4 8.8V18Z"/></svg>
-            <span class="lb">אימייל</span>
+            <span class="lb" data-he="אימייל">EMAIL</span>
             <span class="val ltr">info@thewayinn.co.il</span>
-            <span class="hint">לפניות מסודרות</span>
+            <span class="hint" data-he="לפניות מסודרות">For detailed enquiries</span>
           </a>
         </div>
 
@@ -869,19 +1009,19 @@
         </div>
 
         <div class="info-grid">
-          <div class="info-cell"><h4>כתובת</h4><p>סמטת י״ז 23, צפת<span class="sm">רובע האמנים · 13231</span></p></div>
-          <div class="info-cell"><h4>צ׳ק-אין</h4><p><span class="ltr">15:00</span> · צ׳ק-אאוט <span class="ltr">11:00</span><span class="sm">גמיש בתיאום מראש</span></p></div>
-          <div class="info-cell"><h4>הסוויטות</h4><p>10 · עץ-החיים<span class="sm">אפשר לשכור את כל המתחם</span></p></div>
-          <div class="info-cell"><h4>ארוחת בוקר</h4><p>לה בופה<span class="sm">לחם חם ושולחן גלילי</span></p></div>
+          <div class="info-cell"><h4 data-he="כתובת">Address</h4><p data-he="סמטת י״ז 23, צפת<span class=&quot;sm&quot;>רובע האמנים · 13231</span>">Simtat Yud-Zayin 23, Safed<span class="sm">Artists' Quarter · 13231</span></p></div>
+          <div class="info-cell"><h4 data-he="צ׳ק-אין">Check-in</h4><p data-he="<span class=&quot;ltr&quot;>15:00</span> · צ׳ק-אאוט <span class=&quot;ltr&quot;>11:00</span><span class=&quot;sm&quot;>גמיש בתיאום מראש</span>"><span class="ltr">15:00</span> · check-out <span class="ltr">11:00</span><span class="sm">flexible by arrangement</span></p></div>
+          <div class="info-cell"><h4 data-he="הסוויטות">The suites</h4><p data-he="10 · עץ-החיים<span class=&quot;sm&quot;>אפשר לשכור את כל המתחם</span>">10 · Tree of Life<span class="sm">the whole compound can be booked</span></p></div>
+          <div class="info-cell"><h4 data-he="ארוחת בוקר">Breakfast</h4><p data-he="לה בופה<span class=&quot;sm&quot;>לחם חם ושולחן גלילי</span>">La Buffet<span class="sm">warm bread &amp; a Galilean table</span></p></div>
         </div>
 
         <div class="map-wrap" data-reveal>
           <iframe
-            title="מפת The Way Inn בצפת"
+            title="Map of The Way Inn in Safed" data-he-title="מפת The Way Inn בצפת"
             loading="lazy"
             referrerpolicy="no-referrer-when-downgrade"
             src="https://www.openstreetmap.org/export/embed.html?bbox=35.4907%2C32.9637%2C35.4977%2C32.9673&amp;layer=mapnik&amp;marker=32.965528%2C35.494152"></iframe>
-          <a class="map-link" href="https://www.google.com/maps/search/?api=1&amp;query=32.965528%2C35.494152" target="_blank" rel="noopener">פתח ב<span class="ltr">Google Maps</span> ↗</a>
+          <a class="map-link" href="https://www.google.com/maps/search/?api=1&amp;query=32.965528%2C35.494152" target="_blank" rel="noopener" data-he="פתח ב<span class=&quot;ltr&quot;>Google Maps</span> ↗">Open in <span class="ltr">Google Maps</span> ↗</a>
         </div>
       </div>
     </section>
@@ -894,18 +1034,18 @@
       <div class="foot-grid">
         <div>
           <p class="f-name en-d">The Way Inn</p>
-          <p>מקלט פרטי בבית אבן בן 250 שנה, רובע האמנים, צפת. עשר סוויטות על שם ספירות עץ-החיים.</p>
+          <p data-he="מלון בוטיק בבית אבן בן 250 שנה, רובע האמנים, צפת. עשר סוויטות על שם ספירות עץ-החיים.">A boutique hotel in a 250-year-old stone house, Artists' Quarter, Safed. Ten suites named for the Sephirot of the Tree of Life.</p>
         </div>
         <div>
-          <h4>הבית</h4>
+          <h4 data-he="הבית">The house</h4>
           <p>
-            <a href="#tree">הסוויטות</a><br>
-            <a href="#spa">החמאם והספא</a><br>
-            <a href="#buffet">לה בופה</a>
+            <a href="#tree" data-he="הסוויטות">Our Rooms</a><br>
+            <a href="#spa" data-he="החמאם והספא">SPA &amp; Hammam</a><br>
+            <a href="#buffet" data-he="לה בופה">La Buffet</a>
           </p>
         </div>
         <div>
-          <h4>צור קשר</h4>
+          <h4 data-he="צור קשר">Contact</h4>
           <p>
             <a href="tel:+972737750045" class="ltr nw">+972 73-7750045</a><br>
             <a href="https://wa.me/972526881116" target="_blank" rel="noopener">WhatsApp <span class="ltr nw">52-688-1116</span></a><br>
@@ -913,7 +1053,7 @@
           </p>
         </div>
         <div>
-          <h4>עקבו</h4>
+          <h4 data-he="עקבו">Follow</h4>
           <p>
             <a href="https://thewayinn.co.il/" target="_blank" rel="noopener">thewayinn.co.il ↗</a><br>
             <a href="https://www.instagram.com/thewayinn1/" target="_blank" rel="noopener">Instagram</a> ·
@@ -922,8 +1062,8 @@
         </div>
       </div>
       <div class="copyline">
-        <span>© <span data-year>2026</span> The Way Inn · צפת</span>
-        <span>סמטת י״ז 23, רובע האמנים</span>
+        <span>© <span data-year>2026</span> The Way Inn · <span data-he="צפת">Safed</span></span>
+        <span data-he="סמטת י״ז 23, רובע האמנים">Simtat Yud-Zayin 23, Artists' Quarter</span>
         <span class="ltr">Concept design — GSAP · Three.js</span>
       </div>
     </div>
@@ -944,28 +1084,71 @@
     var motion = hasGSAP && !reduced;
     var WA = "972526881116";
 
+    /* ---------- i18n: English default + Hebrew toggle ---------- */
+    var LANG = "en";
+    try { LANG = localStorage.getItem("twi-lang") || "en"; } catch (e) {}
+    if (LANG !== "he" && LANG !== "en") LANG = "en";
+    var langCbs = [];
+    function t(en, he){ return LANG === "he" ? he : en; }
+    function applyLang(l){
+      LANG = (l === "he") ? "he" : "en";
+      document.documentElement.setAttribute("lang", LANG);
+      document.documentElement.setAttribute("dir", LANG === "he" ? "rtl" : "ltr");
+      document.querySelectorAll("[data-he]").forEach(function(el){
+        if (el.getAttribute("data-en") === null) el.setAttribute("data-en", el.innerHTML);
+        el.innerHTML = LANG === "he" ? el.getAttribute("data-he") : el.getAttribute("data-en");
+      });
+      ["alt","aria-label","title"].forEach(function(a){
+        document.querySelectorAll("[data-he-" + a + "]").forEach(function(el){
+          if (!el.hasAttribute("data-en-" + a)) el.setAttribute("data-en-" + a, el.getAttribute(a) || "");
+          el.setAttribute(a, LANG === "he" ? el.getAttribute("data-he-" + a) : el.getAttribute("data-en-" + a));
+        });
+      });
+      document.querySelectorAll("[data-lang-btn]").forEach(function(b){
+        b.querySelectorAll("[data-l]").forEach(function(s){ s.classList.toggle("off", s.getAttribute("data-l") !== LANG); });
+        b.setAttribute("aria-label", LANG === "he" ? "Switch to English" : "החלפה לעברית");
+      });
+      try { localStorage.setItem("twi-lang", LANG); } catch (e) {}
+      langCbs.forEach(function(fn){ try { fn(); } catch (e) {} });
+    }
+    applyLang(LANG); /* apply persisted language + dir before scenes build */
+
+    /* ---------- YouTube facade ---------- */
+    document.querySelectorAll("[data-film]").forEach(function(f){
+      var play = function(){
+        var id = f.getAttribute("data-film"); if (!id) return;
+        var ifr = document.createElement("iframe");
+        ifr.src = "https://www.youtube-nocookie.com/embed/" + id + "?autoplay=1&rel=0";
+        ifr.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture";
+        ifr.setAttribute("allowfullscreen", ""); ifr.title = "The Way Inn — film";
+        f.innerHTML = ""; f.appendChild(ifr);
+      };
+      f.addEventListener("click", play);
+      f.addEventListener("keydown", function(e){ if (e.key === "Enter" || e.key === " ") { e.preventDefault(); play(); } });
+    });
+
     /* ---------- the ten suites (sephirot) — shared by tree + composer ---------- */
     var SUITES = [
-      { key:"chokhmah", he:"חכמה", en:"Chokhmah", mean:"ראשית המחשבה, ההשראה",  sleeps:"עד 2 אורחים", img:"img/suites/chokhmah.webp", x:430, y:150,
-        blurb:"סוויטה בהירה עם ראש-מיטה תחרת-עץ בכחול צפת ודלת מסולסלת — אור וגיאומטריה מקודשת, המקום שבו מחשבה נולדת." },
-      { key:"bina", he:"בינה", en:"Binah", mean:"התבונה, ההבנה העמוקה", sleeps:"עד 2 אורחים", img:"img/suites/bina.webp", x:170, y:150,
-        blurb:"סוויטה רגועה עם מנדלת-עץ סגולה מעל המיטה ופינת מרפסת — שקט עמוק של הבנה." },
-      { key:"daat", he:"דעת", en:"Da'at", mean:"הידיעה, נקודת החיבור", sleeps:"עד 2 אורחים", img:"img/suites/daat.webp", x:300, y:250,
-        blurb:"סוויטה עדינה עם ראש-מיטה תחרה לבנה, סחלבים ואור רך — נקודת החיבור השקטה." },
-      { key:"hesed", he:"חסד", en:"Chesed", mean:"אהבה ונדיבות בלי גבול", sleeps:"עד 2 אורחים", img:"img/suites/hesed.webp", x:430, y:330,
-        blurb:"סוויטה נדיבה עם חדר רחצה מרוצף פסיפס ומדליון מזרחי — חסד של אבן ומים." },
-      { key:"gevurah", he:"גבורה", en:"Gevurah", mean:"עוצמה, גבולות, מיקוד", sleeps:"עד 2 אורחים", img:"img/suites/gevurah.webp", x:170, y:330,
-        blurb:"סוויטה עוצמתית עם גומחת אבן צפתית מקושתת ומצעי אלמוג — שקט מרוכז בלב האבן." },
-      { key:"tiferet", he:"תפארת", en:"Tiferet", mean:"היופי, ההרמוניה, הלב", sleeps:"עד 2 אורחים", img:"img/suites/tiferet.webp", x:300, y:420,
-        blurb:"לב הבית: סוויטה רחבה עם חלונות קמרון בכחול צפת אל המרפסת ושטיח קילים — הרמוניה של אור ואבן." },
-      { key:"netzach", he:"נצח", en:"Netzach", mean:"הרגש, ההתמדה, הניצחון", sleeps:"עד 2 אורחים", img:"img/suites/netzach.webp", x:430, y:510,
-        blurb:"סוויטה חמה עם ציור איריס, קיר אבן ומנורות ענבר — רגש, התמדה ונוכחות." },
-      { key:"hod", he:"הוד", en:"Hod", mean:"ההדר, הכרת התודה", sleeps:"עד 3 אורחים", img:"img/suites/hod.webp", x:170, y:510,
-        blurb:"סוויטה מקומרת עם קשתות אבן, שטיחי קילים ומבט אל החצר — הוד שבמרחב." },
-      { key:"yesod", he:"יסוד", en:"Yesod", mean:"היסוד, החיבור, הקרקע", sleeps:"עד 2 אורחים", img:"img/suites/yesod.webp", x:300, y:580,
-        blurb:"סוויטה אינטימית עם פרגוד גיאומטרי סגול ושמיכת קילים — היסוד היציב של מנוחה." },
-      { key:"malchut", he:"מלכות", en:"Malchut", mean:"המלכות, הנוכחות, ההארקה", sleeps:"עד 4 אורחים", img:"img/suites/malchut.webp", x:300, y:690,
-        blurb:"הסוויטה המרווחת ביותר: דירת אבן מקומרת עם חלון אבן ופינת אוכל — מלכות של בית." }
+      { key:"chokhmah", he:"חכמה", en:"Chokhmah", mean:"ראשית המחשבה, ההשראה", meanEn:"Wisdom — the first spark of thought", sleeps:"עד 2 אורחים", sleepsEn:"up to 2 guests", img:"img/suites/chokhmah.webp", x:430, y:150,
+        blurb:"סוויטה בהירה עם ראש-מיטה תחרת-עץ בכחול צפת ודלת מסולסלת — אור וגיאומטריה מקודשת, המקום שבו מחשבה נולדת.", blurbEn:"A bright suite with a blue Safed-stone lattice headboard and a carved door — light and sacred geometry, where a thought is born." },
+      { key:"bina", he:"בינה", en:"Binah", mean:"התבונה, ההבנה העמוקה", meanEn:"Understanding, deep insight", sleeps:"עד 2 אורחים", sleepsEn:"up to 2 guests", img:"img/suites/bina.webp", x:170, y:150,
+        blurb:"סוויטה רגועה עם מנדלת-עץ סגולה מעל המיטה ופינת מרפסת — שקט עמוק של הבנה.", blurbEn:"A calm suite with a purple wooden mandala above the bed and a balcony nook — the deep quiet of understanding." },
+      { key:"daat", he:"דעת", en:"Da'at", mean:"הידיעה, נקודת החיבור", meanEn:"Knowledge, the point of connection", sleeps:"עד 2 אורחים", sleepsEn:"up to 2 guests", img:"img/suites/daat.webp", x:300, y:250,
+        blurb:"סוויטה עדינה עם ראש-מיטה תחרה לבנה, סחלבים ואור רך — נקודת החיבור השקטה.", blurbEn:"A delicate suite with a white lattice headboard, orchids and soft light — the quiet point of connection." },
+      { key:"hesed", he:"חסד", en:"Chesed", mean:"אהבה ונדיבות בלי גבול", meanEn:"Loving-kindness without limit", sleeps:"עד 2 אורחים", sleepsEn:"up to 2 guests", img:"img/suites/hesed.webp", x:430, y:330,
+        blurb:"סוויטה נדיבה עם חדר רחצה מרוצף פסיפס ומדליון מזרחי — חסד של אבן ומים.", blurbEn:"A generous suite with a mosaic-tiled bathroom and an oriental medallion — kindness in stone and water." },
+      { key:"gevurah", he:"גבורה", en:"Gevurah", mean:"עוצמה, גבולות, מיקוד", meanEn:"Strength, boundaries, focus", sleeps:"עד 2 אורחים", sleepsEn:"up to 2 guests", img:"img/suites/gevurah.webp", x:170, y:330,
+        blurb:"סוויטה עוצמתית עם גומחת אבן צפתית מקושתת ומצעי אלמוג — שקט מרוכז בלב האבן.", blurbEn:"A powerful suite with an arched Safed-stone niche and coral linens — concentrated quiet at the heart of the stone." },
+      { key:"tiferet", he:"תפארת", en:"Tiferet", mean:"היופי, ההרמוניה, הלב", meanEn:"Beauty, harmony, the heart", sleeps:"עד 2 אורחים", sleepsEn:"up to 2 guests", img:"img/suites/tiferet.webp", x:300, y:420,
+        blurb:"לב הבית: סוויטה רחבה עם חלונות קמרון בכחול צפת אל המרפסת ושטיח קילים — הרמוניה של אור ואבן.", blurbEn:"The heart of the house: a broad suite with blue-framed arched windows onto the balcony and a kilim rug — harmony of light and stone." },
+      { key:"netzach", he:"נצח", en:"Netzach", mean:"הרגש, ההתמדה, הניצחון", meanEn:"Emotion, endurance, victory", sleeps:"עד 2 אורחים", sleepsEn:"up to 2 guests", img:"img/suites/netzach.webp", x:430, y:510,
+        blurb:"סוויטה חמה עם ציור איריס, קיר אבן ומנורות ענבר — רגש, התמדה ונוכחות.", blurbEn:"A warm suite with an iris painting, a stone wall and amber lamps — emotion, endurance and presence." },
+      { key:"hod", he:"הוד", en:"Hod", mean:"ההדר, הכרת התודה", meanEn:"Splendour, gratitude", sleeps:"עד 3 אורחים", sleepsEn:"up to 3 guests", img:"img/suites/hod.webp", x:170, y:510,
+        blurb:"סוויטה מקומרת עם קשתות אבן, שטיחי קילים ומבט אל החצר — הוד שבמרחב.", blurbEn:"A vaulted suite with stone arches, kilim rugs and a view onto the courtyard — splendour in space." },
+      { key:"yesod", he:"יסוד", en:"Yesod", mean:"היסוד, החיבור, הקרקע", meanEn:"Foundation, connection, grounding", sleeps:"עד 2 אורחים", sleepsEn:"up to 2 guests", img:"img/suites/yesod.webp", x:300, y:580,
+        blurb:"סוויטה אינטימית עם פרגוד גיאומטרי סגול ושמיכת קילים — היסוד היציב של מנוחה.", blurbEn:"An intimate suite with a purple geometric screen and a kilim throw — the steady foundation of rest." },
+      { key:"malchut", he:"מלכות", en:"Malchut", mean:"המלכות, הנוכחות, ההארקה", meanEn:"Sovereignty, presence, grounding", sleeps:"עד 4 אורחים", sleepsEn:"up to 4 guests", img:"img/suites/malchut.webp", x:300, y:690,
+        blurb:"הסוויטה המרווחת ביותר: דירת אבן מקומרת עם חלון אבן ופינת אוכל — מלכות של בית.", blurbEn:"The most spacious suite: a vaulted stone apartment with a stone window and a dining nook — a home fit for royalty." }
     ];
     var EDGES = [["chokhmah","bina"],["chokhmah","daat"],["bina","daat"],["chokhmah","hesed"],["bina","gevurah"],
       ["chokhmah","tiferet"],["bina","tiferet"],["daat","tiferet"],["hesed","gevurah"],["hesed","tiferet"],
@@ -1001,11 +1184,11 @@
       return 0.85;
     }
     function stateLine(elev, h){
-      if (elev > 15) return "השמש גבוהה מעל ההרים";
-      if (elev > 0)  return "השמש נמוכה מעל הגליל";
-      if (h < 4 || h >= 21) return "לילה שקט בצפת";
-      if (h < 8) return "עוד מעט בוקר";
-      return "השמש שקעה מעבר לרכס";
+      if (elev > 15) return t("high sun over the hills", "השמש גבוהה מעל ההרים");
+      if (elev > 0)  return t("low sun over the Galilee", "השמש נמוכה מעל הגליל");
+      if (h < 4 || h >= 21) return t("a quiet Safed night", "לילה שקט בצפת");
+      if (h < 8) return t("almost morning", "עוד מעט בוקר");
+      return t("the sun has set", "השמש שקעה מעבר לרכס");
     }
     var now, startD = 0.85;
     try { now = safedNow(); startD = startDarkness(now.elev); }
@@ -1018,22 +1201,28 @@
       if (citySec) citySec.classList.toggle("starts-dark", startD > 0.4);
       var sn = document.querySelector("[data-sky-night]");
       if (sn) sn.style.opacity = Math.max(0, (startD - 0.5) / 0.5);
-      var wl = document.querySelector("[data-walk-line]");
-      if (wl) wl.textContent = now.elev > 15 ? "הצללים יתארכו ככל שתגללו." : (now.elev > 0 ? "הערב יורד לאט." : "הלילה כבר כאן — לכו אל האור שבשער.");
     })();
+    function setWalkLine(){
+      var wl = document.querySelector("[data-walk-line]");
+      if (!wl) return;
+      wl.textContent = now.elev > 15 ? t("Shadows lengthen as you scroll.", "הצללים יתארכו ככל שתגללו.")
+        : (now.elev > 0 ? t("Evening falls slowly.", "הערב יורד לאט.")
+        : t("Night is already here — head for the light at the gate.", "הלילה כבר כאן — לכו אל האור שבשער."));
+    }
+    setWalkLine(); langCbs.push(setWalkLine);
     function tickClock(){
       if (document.hidden) return;
       try {
         var n = safedNow();
-        var t = "עכשיו בצפת · " + n.hhmm;
-        var c = document.querySelector("[data-clock-text]"); if (c) c.textContent = t;
+        var nowLbl = t("Now in Safed", "עכשיו בצפת");
+        var c = document.querySelector("[data-clock-text]"); if (c) c.textContent = nowLbl + " · " + n.hhmm;
         var nt = document.querySelector("[data-now-time]"); if (nt) nt.textContent = n.hhmm;
-        var ns = document.querySelector("[data-now-state]"); if (ns) ns.textContent = stateLine(n.elev, n.h);
+        var ns = document.querySelector("[data-now-state]"); if (ns) ns.textContent = nowLbl + " · " + stateLine(n.elev, n.h);
         var rc = document.querySelector("[data-roof-clock]"); if (rc) rc.textContent = n.hhmm;
-        var rs = document.querySelector("[data-roof-state]"); if (rs) rs.textContent = "עכשיו בצפת · " + stateLine(n.elev, n.h);
+        var rs = document.querySelector("[data-roof-state]"); if (rs) rs.textContent = nowLbl + " · " + stateLine(n.elev, n.h);
       } catch (e) {}
     }
-    tickClock();
+    tickClock(); langCbs.push(tickClock);
     setInterval(tickClock, 30000);
 
     /* ---------- smooth scroll ---------- */
@@ -1143,12 +1332,32 @@
     }
     window.addEventListener("load", finishPre);
     setTimeout(finishPre, 4500);
+    /* hard safety net: if rAF/GSAP never runs (e.g. tab loaded in background), force-clear */
+    setTimeout(function(){
+      if (pre && pre.style.display !== "none") {
+        pre.style.display = "none"; preloaderDone = true; if (lenis) lenis.start();
+        document.querySelectorAll("[data-hero-fade],[data-hero-line]").forEach(function(el){ el.style.opacity = 1; el.style.transform = "none"; });
+      }
+    }, 7000);
 
     /* ---------- header / menu ---------- */
     var head = document.querySelector("[data-head]");
     function headState(){ head.classList.toggle("is-solid", window.scrollY > window.innerHeight * 0.7); }
     window.addEventListener("scroll", headState, { passive: true });
     headState();
+    /* desktop dropdowns */
+    document.querySelectorAll(".nav-link[aria-haspopup]").forEach(function(btn){
+      var dd = btn.parentNode.querySelector(".dropdown"); if (!dd) return;
+      btn.addEventListener("click", function(e){
+        e.preventDefault();
+        var open = dd.classList.toggle("is-open"); btn.setAttribute("aria-expanded", String(open));
+        document.querySelectorAll(".dropdown.is-open").forEach(function(o){ if (o !== dd) { o.classList.remove("is-open"); var b = o.parentNode.querySelector(".nav-link"); if (b) b.setAttribute("aria-expanded", "false"); } });
+      });
+    });
+    document.addEventListener("click", function(e){ if (!e.target.closest(".nav-item")) document.querySelectorAll(".dropdown.is-open").forEach(function(o){ o.classList.remove("is-open"); var b = o.parentNode.querySelector(".nav-link"); if (b) b.setAttribute("aria-expanded", "false"); }); });
+    /* language toggle */
+    document.querySelectorAll("[data-lang-btn]").forEach(function(b){ b.addEventListener("click", function(){ applyLang(LANG === "he" ? "en" : "he"); }); });
+    /* mobile menu */
     var burger = document.querySelector("[data-burger]");
     var inertEls = [document.getElementById("top"), document.querySelector(".site-foot")];
     function setBgInert(on){
@@ -1158,7 +1367,7 @@
       burger.classList.remove("is-open"); menu.classList.remove("is-open");
       head.classList.remove("is-menu"); burger.setAttribute("aria-expanded", "false");
       setBgInert(false);
-      if (hasGSAP) gsap.set(".m-menu a, .m-menu .m-foot", { clearProps: "all" });
+      if (hasGSAP) gsap.set(".m-menu .m-group, .m-menu .m-foot", { clearProps: "all" });
       if (lenis && preloaderDone) lenis.start();
       burger.focus();
     }
@@ -1170,14 +1379,16 @@
       head.classList.add("is-menu"); burger.setAttribute("aria-expanded", "true");
       setBgInert(true);
       if (lenis) lenis.stop();
-      if (motion) gsap.fromTo(".m-menu a, .m-menu .m-foot", { y: 34, opacity: 0 },
-        { y: 0, opacity: 1, duration: 0.7, ease: "power3.out", stagger: 0.06, delay: 0.2, overwrite: "auto" });
-      var first = menu.querySelector("a"); if (first) first.focus();
+      if (motion) gsap.fromTo(".m-menu .m-group, .m-menu .m-foot", { y: 30, opacity: 0 },
+        { y: 0, opacity: 1, duration: 0.6, ease: "power3.out", stagger: 0.05, delay: 0.15, overwrite: "auto" });
+      var first = menu.querySelector("a,button"); if (first) first.focus();
     });
+    menu.querySelectorAll(".m-row[data-acc]").forEach(function(row){ row.addEventListener("click", function(){ row.parentNode.classList.toggle("open"); }); });
+    menu.querySelectorAll(".m-sub a, .m-go").forEach(function(a){ a.addEventListener("click", closeMenu); });
     /* focus trap within the open menu */
     menu.addEventListener("keydown", function(e){
       if (e.key !== "Tab" || !menu.classList.contains("is-open")) return;
-      var f = menu.querySelectorAll("a[href]");
+      var f = menu.querySelectorAll("a[href],button");
       if (!f.length) return;
       var first = f[0], last = f[f.length - 1];
       if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
@@ -1224,7 +1435,7 @@
         g.setAttribute("class", "node"); g.setAttribute("data-key", s.key);
         g.setAttribute("tabindex", "0"); g.setAttribute("role", "button");
         g.setAttribute("aria-pressed", "false");
-        g.setAttribute("aria-label", "סוויטת " + s.he + " — " + s.en);
+        g.setAttribute("aria-label", t(s.en + " suite", "סוויטת " + s.he));
         g.setAttribute("transform", "translate(" + s.x + " " + s.y + ")");
         var halo = document.createElementNS(ns, "circle"); halo.setAttribute("class", "halo"); halo.setAttribute("r", "40");
         var dot = document.createElementNS(ns, "circle"); dot.setAttribute("class", "dot"); dot.setAttribute("r", "27");
@@ -1252,9 +1463,10 @@
         currentKey = key;
         Object.keys(nodeEls).forEach(function(k){ var on = k === key; nodeEls[k].classList.toggle("is-active", on); nodeEls[k].setAttribute("aria-pressed", String(on)); });
         var swap = function(){
-          img.src = s.img; img.alt = "סוויטת " + s.he + " — " + s.en;
-          keyEl.textContent = s.en; heEl.textContent = s.he; enEl.textContent = s.en;
-          meanEl.textContent = s.mean; blurbEl.textContent = s.blurb; sleepsEl.textContent = s.sleeps;
+          img.src = s.img; img.alt = t(s.en + " suite — " + s.he, "סוויטת " + s.he + " — " + s.en);
+          keyEl.textContent = s.en;
+          heEl.textContent = t(s.en, s.he); enEl.textContent = t(s.he, s.en);
+          meanEl.textContent = t(s.meanEn, s.mean); blurbEl.textContent = t(s.blurbEn, s.blurb); sleepsEl.textContent = t(s.sleepsEn, s.sleeps);
         };
         swap();
         if (motion) {
@@ -1263,6 +1475,7 @@
           setTimeout(function(){ panel.classList.remove("is-swap"); }, 600);
         }
       };
+      langCbs.push(function(){ selectSuite(currentKey); });
       reserveBtn.addEventListener("click", function(){
         setReserveSuite(currentKey);
         var target = document.querySelector("#reserve");
@@ -1297,13 +1510,15 @@
       if (!suitesWrap || !sendBtn) return;
       var pick = { suite: null, day: null, nights: 2, guests: 2 };
 
+      function suiteLabel(s){ return t(s.en, s.he) + '<span class="en ltr">' + t(s.he, s.en) + '</span>'; }
       SUITES.forEach(function(s){
         var b = document.createElement("button");
         b.type = "button"; b.dataset.key = s.key; b.setAttribute("aria-pressed", "false");
-        b.innerHTML = s.he + '<span class="en ltr">' + s.en + '</span>';
+        b.innerHTML = suiteLabel(s);
         b.addEventListener("click", function(){ choose(s.key); });
         suitesWrap.appendChild(b);
       });
+      function relabelSuites(){ suitesWrap.querySelectorAll("button").forEach(function(b){ var s = suiteByKey(b.dataset.key); if (s) b.innerHTML = suiteLabel(s); }); }
       function choose(key){
         pick.suite = key;
         suitesWrap.querySelectorAll("button").forEach(function(c){
@@ -1314,30 +1529,33 @@
       }
       setReserveSuite = function(key){ choose(key); };
 
-      var dayFmt = null, dateFmt = null;
-      try {
-        dayFmt = new Intl.DateTimeFormat("he-IL", { weekday: "long", timeZone: "Asia/Jerusalem" });
-        dateFmt = new Intl.DateTimeFormat("he-IL", { day: "numeric", month: "numeric", timeZone: "Asia/Jerusalem" });
-      } catch (e) {}
-      for (var di = 1; di <= 6; di++){
-        (function(di){
-          var dt = new Date(Date.UTC(now.yr, now.mon - 1, now.day + di, 12));
-          var datePart;
-          try { datePart = (dayFmt && dateFmt) ? (dayFmt.format(dt) + " " + dateFmt.format(dt)) : (dt.getUTCDate() + "." + (dt.getUTCMonth() + 1)); }
-          catch (e) { datePart = dt.getUTCDate() + "." + (dt.getUTCMonth() + 1); }
-          var label = (di === 1 ? "מחר · " : di === 2 ? "מחרתיים · " : "") + datePart;
-          var chip = document.createElement("button");
-          chip.type = "button"; chip.textContent = label; chip.setAttribute("aria-pressed", "false");
-          chip.addEventListener("click", function(){
-            pick.day = label;
-            daysWrap.querySelectorAll("button").forEach(function(c){
-              c.classList.toggle("on", c === chip); c.setAttribute("aria-pressed", String(c === chip));
-            });
-            refresh();
-          });
-          daysWrap.appendChild(chip);
-        })(di);
+      function fmtDay(di){
+        var dt = new Date(Date.UTC(now.yr, now.mon - 1, now.day + di, 12));
+        var loc = LANG === "he" ? "he-IL" : "en-GB";
+        var datePart;
+        try { datePart = new Intl.DateTimeFormat(loc, { weekday: "long", timeZone: "Asia/Jerusalem" }).format(dt) + " " + new Intl.DateTimeFormat(loc, { day: "numeric", month: "numeric", timeZone: "Asia/Jerusalem" }).format(dt); }
+        catch (e) { datePart = dt.getUTCDate() + "." + (dt.getUTCMonth() + 1); }
+        return (di === 1 ? t("Tomorrow · ", "מחר · ") : di === 2 ? t("Day after · ", "מחרתיים · ") : "") + datePart;
       }
+      function buildDays(){
+        daysWrap.innerHTML = "";
+        for (var di = 1; di <= 6; di++){
+          (function(di){
+            var chip = document.createElement("button");
+            chip.type = "button"; chip.dataset.di = di; chip.textContent = fmtDay(di);
+            var sel = pick.dayIdx === di;
+            chip.classList.toggle("on", sel); chip.setAttribute("aria-pressed", String(sel));
+            if (sel) pick.day = chip.textContent;
+            chip.addEventListener("click", function(){
+              pick.dayIdx = di; pick.day = chip.textContent;
+              daysWrap.querySelectorAll("button").forEach(function(c){ c.classList.toggle("on", c === chip); c.setAttribute("aria-pressed", String(c === chip)); });
+              refresh();
+            });
+            daysWrap.appendChild(chip);
+          })(di);
+        }
+      }
+      buildDays();
 
       document.querySelectorAll("[data-nights]").forEach(function(b){
         b.addEventListener("click", function(){
@@ -1354,21 +1572,25 @@
 
       function refresh(){
         var s = pick.suite ? suiteByKey(pick.suite) : null;
-        var ok = s && pick.day;
+        var ok = s && pick.dayIdx;
         sendBtn.setAttribute("aria-disabled", ok ? "false" : "true");
-        var nl = pick.nights === 1 ? "לילה" : pick.nights + " לילות";
-        var gl = pick.guests === 1 ? "אורח" : pick.guests + " אורחים";
+        var nl = pick.nights === 1 ? t("1 night", "לילה") : pick.nights + " " + t("nights", "לילות");
+        var gl = pick.guests === 1 ? t("1 guest", "אורח") : pick.guests + " " + t("guests", "אורחים");
         if (!ok) {
-          summary.innerHTML = s ? ("סוויטת <b>" + s.he + "</b> · בחרו גם תאריך צ׳ק-אין.") : "בחרו סוויטה ותאריך — וההזמנה תיפתח בוואטסאפ.";
+          summary.innerHTML = s
+            ? t("The <b>" + s.en + "</b> suite · also pick a check-in date.", "סוויטת <b>" + s.he + "</b> · בחרו גם תאריך צ׳ק-אין.")
+            : t("Choose a suite and a date — your request opens in WhatsApp.", "בחרו סוויטה ותאריך — וההזמנה תיפתח בוואטסאפ.");
           sendBtn.removeAttribute("href"); return;
         }
-        summary.innerHTML = "סוויטת <b>" + s.he + "</b> · " + pick.day + " · " + nl + " · " + gl + ".";
-        var brand = "⁨The Way Inn⁩", enName = "⁨" + s.en + "⁩";
-        var msg = "שלום! אשמח לבדוק זמינות ב" + brand + " ✦ סוויטת " + s.he + " (" + enName + ") ✦ צ׳ק-אין " +
-                  pick.day + " ✦ " + nl + " ✦ " + gl + ". תודה!";
+        summary.innerHTML = t("The <b>" + s.en + "</b> suite · " + pick.day + " · " + nl + " · " + gl + ".",
+                              "סוויטת <b>" + s.he + "</b> · " + pick.day + " · " + nl + " · " + gl + ".");
+        var brand = "⁨The Way Inn⁩";
+        var msg = t("Hello! I'd love to check availability at " + brand + " ✦ " + s.en + " suite ✦ check-in " + pick.day + " ✦ " + nl + " ✦ " + gl + ". Thank you!",
+                    "שלום! אשמח לבדוק זמינות ב" + brand + " ✦ סוויטת " + s.he + " ✦ צ׳ק-אין " + pick.day + " ✦ " + nl + " ✦ " + gl + ". תודה!");
         sendBtn.href = "https://wa.me/" + WA + "?text=" + encodeURIComponent(msg);
       }
       refresh();
+      langCbs.push(function(){ relabelSuites(); buildDays(); refresh(); });
     })();
 
     /* ---------- rooftop sunset (scroll-scrubbed) ---------- */
@@ -1386,11 +1608,13 @@
       var title = document.querySelector("[data-roof-title]");
       var sub = document.querySelector("[data-roof-sub]");
       var TX = [
-        { t: 0.82, h: "ויהי ערב מעל צפת.", s: "כוכבים מעל ההר, ושקט. זה הנוף מהגג של הבית." },
-        { t: 0.56, h: "הזהב הופך לכחול.", s: "השמש נגעה ברכס. עוד רגע יידלקו הכוכבים מעל צפת." },
-        { t: 0,    h: "מרפסת הגג, מול הרי הגליל.", s: "גללו — והשמש תשקע מעבר לרכס, הזהב יהפוך לכחול, והכוכבים יידלקו מעל צפת." }
+        { t: 0.82, hEn: "And there was evening over Safed.", sEn: "Stars over the mountain, and quiet. This is the view from the rooftop.", hHe: "ויהי ערב מעל צפת.", sHe: "כוכבים מעל ההר, ושקט. זה הנוף מהגג של הבית." },
+        { t: 0.56, hEn: "The gold turns to blue.", sEn: "The sun has touched the ridge. The stars are about to come out over Safed.", hHe: "הזהב הופך לכחול.", sHe: "השמש נגעה ברכס. עוד רגע יידלקו הכוכבים מעל צפת." },
+        { t: 0,    hEn: "The rooftop terrace, facing the Galilee.", sEn: "Scroll — the sun sets behind the ridge, the gold turns to blue, and the stars come out over Safed.", hHe: "מרפסת הגג, מול הרי הגליל.", sHe: "גללו — והשמש תשקע מעבר לרכס, הזהב יהפוך לכחול, והכוכבים יידלקו מעל צפת." }
       ];
-      var lastTx = -1;
+      var lastTx = -1, curTx = 2;
+      function applyTx(){ title.textContent = t(TX[curTx].hEn, TX[curTx].hHe); sub.textContent = t(TX[curTx].sEn, TX[curTx].sHe); }
+      langCbs.push(applyTx);
       ScrollTrigger.create({
         trigger: ".roof-sec", start: "top top", end: "bottom bottom", scrub: 0.6,
         onUpdate: function(self){
@@ -1403,7 +1627,7 @@
           gsap.set(night, { opacity: Math.min(1, Math.max(0, (p - 0.4) / 0.4)) });
           gsap.set(stars, { opacity: Math.max(0, (p - 0.62) / 0.38) });
           var idx = p >= TX[0].t ? 0 : (p >= TX[1].t ? 1 : 2);
-          if (idx !== lastTx) { lastTx = idx; title.textContent = TX[idx].h; sub.textContent = TX[idx].s; }
+          if (idx !== lastTx) { lastTx = idx; curTx = idx; applyTx(); }
         }
       });
     })();
